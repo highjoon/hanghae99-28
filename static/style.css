@@ -98,7 +98,6 @@ p {
 /* Navbar */
 
 #navbar {
-    position: fixed;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -124,8 +123,7 @@ p {
 /* Home */
 
 #home {
-    padding: 40px;
-    padding-top: 120px;
+    padding: 0 10px 40px 40px;
     justify-content: center;
     display: flex;
 }
@@ -137,6 +135,7 @@ p {
 .home__container .home__title {
     color: var(--color-black);
     margin-bottom: 50px;
+    cursor: pointer;
 }
 
 #home__form {
@@ -155,6 +154,7 @@ p {
     border: 2px solid var(--color-black);
     font-size: var(--font-medium);
     margin: 0 auto;
+    vertical-align: bottom;
 }
 
 .home__form--input:focus::-webkit-input-placeholder {
@@ -327,4 +327,12 @@ p {
 
 .reveiw__list--col .comment {
     flex-basis: 80%;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }
