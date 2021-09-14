@@ -2,9 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <title>what is your choice?</title>
 </head>
-<body>
+<style>
+    .wrap {
 
+        padding: 15px;
+        text-align: center;
+
+
+    }
+
+    .login {
+        width: 300px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .navbar {
+
+    }
+
+</style>
+<script>
+    function sign_in() {
+        let {{ usermail }} = $("#input-username").val()
+        let {{ password }} = $("#input-password").val()
+
+        if (usermail == "") {
+            $("#help-id-login").text("E-mail을 입력해주세요.")
+            $("#input-usemail").focus()
+            return;
+        } else {
+            $("#help-id-login").text("")
+        }
+
+        if (password == "") {
+            $("#help-password-login").text("비밀번호를 입력해주세요.")
+            $("#input-password").focus()
+            return;
+        } else {
+            $("#help-password-login").text("")
+        }
+        $.ajax({
+            type: "POST",
+            url: "/sign_in",
+            data: {
+                usermail_give:{{ usermail }} ,
+                password_give:{{ password }}
+            },
+            success: function {{ response }} {
+                {% if (response['result'] == 'success') %}
+                    $.cookie('mytoken', response['token'], {path: '/'});
+                    window.location.replace("/")
+                {% else %}
+                    alert(response['msg'])
+                {% endif %}
+            }
+        });
+    }
+</script>
+<body>
+    <div> id="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__menu__item active" data-link="#home">로그인</li>
+            <li class="navbar__menu__item" data-link="#about">회원가입</li>
+        </ul>
+    </div>
+    <div class="wrap">
+        <h1>What is your choice?</h1>
+        <div>
+            <label>E-mail</label> <input type="email" name="E-mail">
+        </div>
+        <div>
+            <label>비밀번호</label><input type="password" name="PW">
+        </div>
+        <button type="submit" class="login">로그인</button>
+</div>
 </body>
 </html>
+
