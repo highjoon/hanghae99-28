@@ -18,5 +18,11 @@ def main():
     return render_template("index.html")
 
 
+@app.route('/api/review_detail', methods=['GET'])
+def show_stars():
+    review_detail = list(db.review.find({}, {'_id': False}))
+    return jsonify({'review_detail': review_detail})
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
