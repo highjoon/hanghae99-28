@@ -16,12 +16,14 @@ app.config.from_pyfile('config.py')
 
 @app.route('/')
 def main():
-    return render_template("index.html")
+    camps = list(db.review.find({}, {'_id': False}))
+    return render_template("index.html", camps=camps)
 
 
-@app.route('/review')
-def review():
-    return render_template("review.html")
+@app.route('/api/review', methods=['GET'])
+def show_stars():
+    review_detail = list(db.review.find({}, {'_id': False}))
+    return render_template("review.html", review_detail=review_detail)
 
 
 if __name__ == '__main__':
