@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Review</title>
+    <meta name="description" content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
+    <meta name="author" content="hanghae99-28"/>
+    <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navbar">
+    <ul class="navbar__menu">
+        <li class="navbar__menu__item active" data-link="#home">로그인</li>
+        <li class="navbar__menu__item" data-link="#about">회원가입</li>
+    </ul>
+</nav>
+
+<!-- Home -->
+<section id="home">
+    <div class="home__container">
+        <h1 class="home__title">What is your choice?</h1>
+    </div>
+</section>
+<section id="review">
+    <div class="review__detail">
+        <div class="review__detail--container">
+            <img src="{{ url_for('static', filename='img/codesquad.png') }}" alt="codesquad" id="boot_img" class="boot_logo"/>
+            <div class="review__detail--info">
+                <a href="#" id="boot_name">코드스쿼드</a>
+                <p>지향 : <span id="direction">웹, 앱 별도</span></p>
+                <p>언어 : <span id="lang">JS, Swift</span></p>
+                <p>입학시험 : <span id="istest">O</span></p>
+                <p>비용 : <span id="tuition">396만원</span></p>
+                <p>기간 : <span id="period">6개월</span></p>
+            </div>
+        </div>
+
+        <div class="review__write">
+                    <span>
+                        만족도
+                        <input type="radio" id="overall1" name="review_overall" value="review_overall"/>
+                        <label for="overall1">1</label>
+                        <input type="radio" id="overall2" name="review_overall" value="review_overall"/>
+                        <label for="overall2">2</label>
+                        <input type="radio" id="overall3" name="review_overall" value="review_overall"/>
+                        <label for="overall3">3</label>
+                        <input type="radio" id="overall4" name="review_overall" value="review_overall"/>
+                        <label for="overall4">4</label>
+                        <input type="radio" id="overall5" name="review_overall" value="review_overall"/>
+                        <label for="overall5">5</label>
+                    </span>
+            <span>
+                        기간
+                        <input type="radio" id="period1" name="reivew_period" value="reivew_period"/>
+                        <label for="period1">1</label>
+                        <input type="radio" id="period2" name="reivew_period" value="reivew_period"/>
+                        <label for="period2">2</label>
+                        <input type="radio" id="period3" name="reivew_period" value="reivew_period"/>
+                        <label for="period3">3</label>
+                        <input type="radio" id="period4" name="reivew_period" value="reivew_period"/>
+                        <label for="period4">4</label>
+                        <input type="radio" id="period5" name="reivew_period" value="reivew_period"/>
+                        <label for="period5">5</label>
+                    </span>
+            <span>
+                        추천 의향
+                        <input type="radio" id="recommend1" name="review_recommend" value="review_recommend"/>
+                        <label for="recommend1">1</label>
+                        <input type="radio" id="recommend2" name="review_recommend" value="review_recommend"/>
+                        <label for="recommend2">2</label>
+                        <input type="radio" id="recommend3" name="review_recommend" value="review_recommend"/>
+                        <label for="recommend3">3</label>
+                        <input type="radio" id="recommend4" name="review_recommend" value="review_recommend"/>
+                        <label for="recommend4">4</label>
+                        <input type="radio" id="recommend5" name="review_recommend" value="review_recommend"/>
+                        <label for="recommend5">5</label>
+                    </span>
+            <span>
+                        비용
+                        <input type="radio" id="tuition1" name="review_tuition" value="review_tuition"/>
+                        <label for="tuition1">1</label>
+                        <input type="radio" id="tuition2" name="review_tuition" value="review_tuition"/>
+                        <label for="tuition2">2</label>
+                        <input type="radio" id="tuition3" name="review_tuition" value="review_tuition"/>
+                        <label for="tuition3">3</label>
+                        <input type="radio" id="tuition4" name="review_tuition" value="review_tuition"/>
+                        <label for="tuition4">4</label>
+                        <input type="radio" id="tuition5" name="review_tuition" value="review_tuition"/>
+                        <label for="tuition5">5</label>
+                    </span>
+            <form action="POST" class="comment__form">
+                <textarea name="review_comment" form="inform" id="review_comment" cols="90" rows="4"></textarea>
+                <button class="review__btn">등록</button>
+            </form>
+        </div>
+        <div id="review__list">
+            <div class="reveiw__list--col">
+                <div class="index"><span>1</span></div>
+                <div class="nickname"><span>홍길동</span></div>
+                <div class="comment">
+                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias, dolores.</span></div>
+            </div>
+            <div class="reveiw__list--col">
+                <div class="index">2</div>
+                <div class="nickname">홍길동</div>
+                <div class="comment">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Id recusandae illo nisi, eaque mollitia
+                    repellendus? Cum amet saepe ex facilis vero aliquid eos, recusandae id?
+                    Corporis amet corrupti quam doloribus nulla fugiat pariatur, eos itaque accusantium sint eaque
+                    voluptates est blanditiis, dicta veritatis, quae sapiente officiis excepturi
+                    vero cupiditate iste.
+                </div>
+            </div>
+            <div class="reveiw__list--col">
+                <div class="index">3</div>
+                <div class="nickname">홍길동</div>
+                <div class="comment">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, dignissimos explicabo quaerat
+                    officiis veniam, saepe possimus odit at quisquam distinctio mollitia dolore
+                    minus dolorum? Odit quos voluptatum pariatur libero totam, laudantium accusantium ad quia eos
+                    veritatis? Porro veritatis temporibus ipsa maiores eius dolore. Repellendus
+                    eius dolore voluptas? Quisquam tempore nam maxime veniam ullam dolore eaque laborum quidem, fugit ut
+                    corrupti eum quibusdam, officia doloribus soluta. Laboriosam
+                    consequatur ratione atque voluptas dicta ad fugiat quaerat reprehenderit quidem ex, harum veniam
+                    illo deserunt voluptatibus. Omnis suscipit iure voluptate qui quia deleniti
+                    eveniet quis ab! Maxime tenetur assumenda voluptatem vero tempore hic cum earum pariatur voluptas?
+                    Qui porro eius nemo veritatis facere deleniti, ea consequuntur pariatur
+                    nisi maiores delectus fugit atque tempore? Quisquam dicta aperiam excepturi debitis nulla optio quis
+                    voluptates beatae eaque voluptate et ad porro, explicabo ipsum libero
+                    tenetur hic laudantium earum amet quam voluptatibus autem est eius nostrum? Quo, exercitationem
+                    tempora qui suscipit et sint eligendi quod molestias! Molestiae, nihil!
+                    Aspernatur doloremque eius, cupiditate a beatae dolorum maiores incidunt debitis suscipit neque
+                    eveniet voluptates id aut dignissimos sapiente tempora saepe voluptatum
+                    totam! Earum distinctio labore atque hic, quos itaque impedit. Quis mollitia dignissimos ad possimus
+                    ipsum, deleniti vero fugit aspernatur magni sapiente soluta iure quam
+                    nemo laborum est odio rem tempore recusandae. Fugiat excepturi, voluptate incidunt ab praesentium
+                    explicabo? Magnam suscipit possimus dolor, qui consequuntur tenetur iste
+                    blanditiis officiis adipisci fuga ullam dolores deserunt nihil labore vero minima, itaque assumenda
+                    ea tempora! Saepe velit, dignissimos quos amet obcaecati labore
+                    temporibus quia tenetur mollitia, aperiam aliquam et impedit nobis exercitationem voluptatum qui,
+                    libero corporis suscipit necessitatibus dolor delectus non? Magnam, quia
+                    quo porro nihil sit ipsa vitae soluta vero necessitatibus cupiditate blanditiis officia expedita
+                    laborum dicta quaerat nesciunt animi est asperiores architecto a qui
+                    facilis! Voluptatum debitis minima tenetur doloremque dignissimos minus recusandae explicabo quam,
+                    quis reprehenderit perferendis maxime. Eius molestiae ex temporibus sequi
+                    magnam, laborum labore? Sed rerum esse, fugiat nam iusto in harum illo voluptas vero explicabo
+                    eligendi modi veniam excepturi aliquam natus nobis deserunt doloribus
+                    consectetur. Magnam adipisci cumque quis atque dolorum, alias inventore sint. Atque quae tenetur
+                    quos quis, quo architecto, distinctio beatae eos molestias cupiditate
+                    nostrum maxime ipsam placeat sit! Pariatur sed vero quaerat in tenetur quibusdam. Officiis nobis id
+                    ipsum repellat dolor quod quam modi ea veritatis commodi excepturi
+                    ipsam, numquam error unde non nemo aliquid! Vitae nobis veritatis vero aliquid dolores recusandae
+                    minima molestiae quibusdam eius illo mollitia, et quidem earum tenetur
+                    repellat officia animi vel eum. Incidunt aspernatur est laborum asperiores, deleniti modi iure
+                    eligendi, minus possimus quod quas id, sed sunt veniam magni ab commodi
+                    voluptate corporis. Consectetur magni omnis quod cupiditate voluptatem, officiis, ut aliquam eveniet
+                    pariatur ipsam enim dolores doloremque reiciendis error! Est at nihil
+                    iusto magnam magni ea amet quis ullam accusamus assumenda dolores tenetur perferendis incidunt,
+                    ducimus nam eaque optio rem, qui beatae voluptatum iure earum nesciunt
+                    culpa? Quibusdam at fugit quia deleniti, beatae provident rem laborum pariatur nostrum. Ut eveniet
+                    provident minima, a libero maxime quibusdam fugiat!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -205,3 +205,126 @@ p {
     border-radius: var(--size-border-radius);
 }
 
+/* Reivew Detail */
+
+#review {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.review__detail {
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border: 2px solid var(--color-black);
+    border-radius: var(--size-border-radius);
+}
+
+.review__detail--container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.review__detail--container .boot_logo {
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+    display: inline;
+    float: left;
+}
+
+.review__detail--info {
+    margin: 0 auto;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.review__detail--info #boot_name {
+    font-size: var(--font-medium);
+}
+
+.review__detail--info p {
+    font-size: var(--font-regular);
+    margin-top: 25px;
+}
+
+/* Reivew Write */
+
+.review__write {
+    margin: 0 auto;
+    width: 85%;
+}
+
+.review__write span {
+    text-align: center;
+}
+
+.review__write span:nth-child(even) {
+    float: left;
+    margin: 15px auto;
+}
+
+.review__write span:nth-child(odd) {
+    float: right;
+    margin: 15px auto;
+}
+
+.review__write span input[type="radio"] {
+    display: none;
+}
+
+.review__write span input[type="radio"] + label {
+    margin: 0;
+    padding: 2px 10px;
+    display: inline-block;
+    border: solid 1px var(--color-black);
+    background-color: var(--color-white);
+    text-align: center;
+    transition: all var(--animation-duration) ease-in-out;
+    cursor: pointer;
+}
+
+.review__write span input[type="radio"]:checked + label {
+    background-color: var(--color-grey);
+    color: var(--color-white);
+    box-shadow: 0 0 10px var(--color-dark-grey);
+    border-color: var(--color-grey);
+}
+
+#review_comment {
+    height: 90px;
+    vertical-align: bottom;
+}
+
+.review__btn {
+    border: 2px solid var(--color-black);
+    border-radius: var(--size-border-radius);
+    width: 90px;
+    height: 90px;
+    vertical-align: bottom;
+}
+
+/* Reivew List */
+
+.reveiw__list--col {
+    display: flex;
+    margin: 30px 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid var(--color-black);
+}
+
+.reveiw__list--col .index {
+    flex-basis: 10%;
+}
+
+.reveiw__list--col .nickname {
+    flex-basis: 20%;
+}
+
+.reveiw__list--col .comment {
+    flex-basis: 80%;
+}
