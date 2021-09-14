@@ -25,7 +25,6 @@
             crossorigin="anonymous"
     ></script>
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
-    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
 </head>
 <body>
 <!-- Navbar -->
@@ -53,19 +52,19 @@
         </div>
     {% endfor %}
 </section>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
 <script>
     let camps = {{camps | tojson}};
     let campList = [];
     for (let i = 0; i < camps.length; i++) {
         campList.push(camps[i]);
     }
-
     $('.home__title').click(function () {
         location.reload();
     });
 
     $('.home__form--input').on("keyup", function (key) {
-        if (key.keyCode==13) {
+        if (key.keyCode == 13) {
             find_camp();
         }
     });
