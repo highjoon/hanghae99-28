@@ -4,13 +4,30 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Review</title>
-    <meta name="description" content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
+    <meta name="description"
+          content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
     <meta name="author" content="hanghae99-28"/>
     <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+    <script>
+    </script>
 </head>
 <body>
 <!-- Navbar -->
@@ -30,15 +47,18 @@
 <section id="review">
     <div class="review__detail">
         <div class="review__detail--container">
-            <img src="{{ url_for('static', filename='img/code_squad.png') }}" alt="codesquad" id="boot_img" class="boot_logo"/>
-            <div class="review__detail--info">
-                <a href="#" id="boot_name">코드스쿼드</a>
-                <p>지향 : <span id="direction">웹, 앱 별도</span></p>
-                <p>언어 : <span id="lang">JS, Swift</span></p>
-                <p>입학시험 : <span id="istest">O</span></p>
-                <p>비용 : <span id="tuition">396만원</span></p>
-                <p>기간 : <span id="period">6개월</span></p>
-            </div>
+            {% for camp in camps %}
+                <img src="{{ url_for('static', filename='img/'+ camp['boot_img'])}}" alt="codesquad" id={{ camp['id'] }}
+                     class="boot_logo"/>
+                <div class="review__detail--info">
+                    <a href={{ camp['link'] }} id="boot_name">{{ camp['name'] }}</a>
+                    <p>지향 : <span id="direction">{{ camp['direction'] }}</span></p>
+                    <p>언어 : <span id="lang">{{ camp['lang'] }}</span></p>
+                    <p>입학시험 : <span id="istest">{{ camp['istest'] }}</span></p>
+                    <p>비용 : <span id="tuition">{{ camp['tuition'] }}</span></p>
+                    <p>기간 : <span id="period">{{ camp['period'] }}</span></p>
+                </div>
+            {% endfor %}
         </div>
 
         <div class="review__write">
@@ -104,7 +124,8 @@
                 <div class="index"><span>1</span></div>
                 <div class="nickname"><span>홍길동</span></div>
                 <div class="comment">
-                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias, dolores.</span></div>
+                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias, dolores.</span>
+                </div>
             </div>
             <div class="reveiw__list--col">
                 <div class="index">2</div>
@@ -170,5 +191,11 @@
         </div>
     </div>
 </section>
+<script>
+    $('.home__title').click(function () {
+        location.reload();
+    });
+    let camps = {{camps | tojson}}[0];
+</script>
 </body>
 </html>
