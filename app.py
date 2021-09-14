@@ -20,10 +20,10 @@ def main():
     return render_template("index.html", camps=camps)
 
 
-@app.route('/api/review', methods=['GET'])
-def show_stars():
-    review_detail = list(db.review.find({}, {'_id': False}))
-    return render_template("review.html", review_detail=review_detail)
+@app.route('/api/review/<keyword>')
+def review(keyword):
+    camps = list(db.review.find({'id': keyword}, {'_id': False}))
+    return render_template("review.html", camps=camps, keyword=keyword)
 
 
 if __name__ == '__main__':
