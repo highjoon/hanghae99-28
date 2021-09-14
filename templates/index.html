@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Main</title>
-        <meta name="description" content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션" />
-        <meta name="author" content="hanghae99-28" />
-        <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
-        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navbar -->
-        <nav id="navbar">
-            <ul class="navbar__menu">
-                <li class="navbar__menu__item active" data-link="#home">로그인</li>
-                <li class="navbar__menu__item" data-link="#about">회원가입</li>
-            </ul>
-        </nav>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Main</title>
+    <meta name="description"
+          content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
+    <meta name="author" content="hanghae99-28"/>
+    <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navbar">
+    <ul class="navbar__menu">
+        <li class="navbar__menu__item active" data-link="#home">로그인</li>
+        <li class="navbar__menu__item" data-link="#about">회원가입</li>
+    </ul>
+</nav>
 
-        <!-- Home -->
-        <section id="home">
-            <div class="home__container">
-                <h1 class="home__title">What is your choice?</h1>
-                <form action="post" id="home__form">
-                    <input class="home__form--input" id="boot_search" type="text" placeholder="부트캠프를 검색해주세요" />
-                    <button class="home__form--btn">검색</button>
-                </form>
-            </div>
-        </section>
-        <section id="main">
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/90_factory.png') }}" alt="90factory" id="boot_img" />
-                <p class="boot_name" id="boot_name">구공팩토리</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/code_squad.png') }}" alt="codesquad" id="boot_img" />
-                <p class="boot_name" id="boot_name">코드스쿼드</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/code_states.png') }}" alt="codestates" id="boot_img" />
-                <p class="boot_name" id="boot_name">코드스테이츠</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/fast_campus.png') }}" alt="fastcampus" id="boot_img" />
-                <p class="boot_name" id="boot_name">패스트캠퍼스</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/hanghae99.png') }}" alt="hanghae99" id="boot_img" />
-                <p class="boot_name" id="boot_name">항해99</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/team_nova.png') }}" alt="teamnova" id="boot_img" />
-                <p class="boot_name" id="boot_name">팀노바</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/vanilla_coding.png') }}" alt="vanillacoding" id="boot_img" />
-                <p class="boot_name" id="boot_name">바닐라코딩</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/we_code.png') }}" alt="wecode" id="boot_img" />
-                <p class="boot_name" id="boot_name">위코드</p>
-                <p class="avg_grade">3.5</p>
-            </div>
-        </section>
-    </body>
+<!-- Home -->
+<section id="home">
+    <div class="home__container">
+        <h1 class="home__title">What is your choice?</h1>
+        <input class="home__form--input" id="boot_search" type="text" placeholder="부트캠프를 검색해주세요"/>
+        <button class="home__form--btn" onclick="find_camp()">검색</button>
+    </div>
+</section>
+<section id="main">
+    {% for camp in camps %}
+        <div class="card" onclick="window.location.href = '/review'" id={{ camp[
+    'id'] }}>
+            <img src="static/img/{{ camp['boot_img'] }}" alt="{{ camp['name'] }}" id="boot_img"/>
+            <p class="boot_name" id="boot_name">{{ camp['name'] }}</p>
+            <p class="avg_grade">3.5</p>
+        </div>
+    {% endfor %}
+</section>
+<script>
+    let camps = {{camps | tojson}};
+    let campList = [];
+    for (let i = 0; i < camps.length; i++) {
+        campList.push(camps[i]);
+    }
+
+    $('.home__title').click(function () {
+        location.reload();
+    });
+
+    $('.home__form--input').on("keyup",function(key){
+        if(key.keyCode==13) {
+            find_camp();
+        }
+    });
+</script>
+</body>
 </html>
