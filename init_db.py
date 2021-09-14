@@ -72,7 +72,7 @@ doc = [
 
     {'id': 'hanghae99',
      'boot_img': 'hanghae99.png',
-     'name': '스파르타코딩클럽',
+     'name': '항해99',
      'link': 'https://hanghae99.spartacodingclub.kr/?utm_source=google_sa&utm_medium=paid&utm_campaign=12074986494&utm_content=116474124916&utm_term=%ED%95%AD%ED%95%B499_525715713510&gclid=EAIaIQobChMI1uWKwu398gIVCXmLCh2HAAUYEAAYASAAEgLKrfD_BwE',
      'tuition': '400만원',
      'period': '3개월',
