@@ -8,10 +8,11 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-client = MongoClient('IPadress', 27017, username="아이디", password="비밀번호")
+client = MongoClient('localhost', 27017)
 db = client.dbsparta_28
 
 app.config.from_pyfile('config.py')
+
 
 @app.route('/')
 def main():

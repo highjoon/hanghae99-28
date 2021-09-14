@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Main</title>
+    <meta name="description" content="Portfolio for world-renowned software engineer Ellie"/>
+    <meta name="author" content="Ellie"/>
+    <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
 </head>
 <body>
+<!-- Navbar -->
+<nav id="navbar">
+    <ul class="navbar__menu">
+        <li class="navbar__menu__item active" data-link="#home">로그인</li>
+        <li class="navbar__menu__item" data-link="#about">회원가입</li>
+    </ul>
+</nav>
 
+<!-- Home -->
+<section id="home">
+    <div class="home__container">
+        <h1 class="home__title">What is your choice?</h1>
+        <form action="post" id="home__form">
+            <input class="home__form--input" id="boot_search" type="text" placeholder="부트캠프를 검색해주세요"/>
+            <button class="home__form--btn">검색</button>
+        </form>
+    </div>
+</section>
+<section id="main">
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/90factory.png') }}" alt="90factory" id="boot_img"/>
+        <p class="boot_name" id="boot_name">구공팩토리</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/codesquad.png') }}" alt="codesquad" id="boot_img"/>
+        <p class="boot_name" id="boot_name">코드스쿼드</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/codestates.png') }}" alt="codestates" id="boot_img"/>
+        <p class="boot_name" id="boot_name">코드스테이츠</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/fastcampus.png') }}" alt="fastcampus" id="boot_img"/>
+        <p class="boot_name" id="boot_name">패스트캠퍼스</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/hanghae99.png') }}" alt="hanghae99" id="boot_img"/>
+        <p class="boot_name" id="boot_name">항해99</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/teamnova.png') }}" alt="teamnova" id="boot_img"/>
+        <p class="boot_name" id="boot_name">팀노바</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/vanillacoding.png') }}" alt="vanillacoding" id="boot_img"/>
+        <p class="boot_name" id="boot_name">바닐라코딩</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/wecode.png') }}" alt="wecode" id="boot_img"/>
+        <p class="boot_name" id="boot_name">위코드</p>
+        <p class="avg_grade">3.5</p>
+    </div>
+</section>
+<script src="./main.js"></script>
 </body>
 </html>
