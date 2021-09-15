@@ -26,5 +26,34 @@ def review(keyword):
     return render_template("review.html", camps=camps, keyword=keyword)
 
 
+@app.route('/api/review/post', methods=['POST'])
+def review_post():
+    author_receive = request.form['author_give']
+    campId_receive = request.form['campId_give']
+    overall_receive = request.form['overall_give']
+    period_receive = request.form['period_give']
+    recommend_receive = request.form['recommend_give']
+    tuition_receive = request.form['tuition_give']
+    comment_receive = request.form['comment_give']
+    avg_receive = request.form['avg_give']
+
+    doc = {
+        'author': author_receive,
+        'campId': campId_receive,
+        'overall': overall_receive,
+        'period': period_receive,
+        'recommend': recommend_receive,
+        'tuition': tuition_receive,
+        'comment': comment_receive,
+        'avg': avg_receive,
+    }
+
+    db.review.insert_one(doc)
+    try:
+        return jsonify({'result': 'success', 'msg': '리뷰 전송 완료!'})
+    except:
+        return jsonify({'result': 'success', 'msg': '실패!'})
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
