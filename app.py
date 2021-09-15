@@ -25,7 +25,6 @@ def api_sign_in():
     result = db.user.find_one({'id': id_receive, 'pw': pw_hash})  # 매칭 안되면
 
     if result is not None:
-
         payload = {
             'id': id_receive,  # login.html 에서 로그인 성공해서 토큰값 발행되면 실행되서 결과값 나오는곳
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 2)
