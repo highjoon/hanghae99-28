@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/signup.css' ) }}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+  <title>What's Your Choices?</title>
+</head>
+</head>
+
+<body>
+  <div class="input-options">
+    <label for="userMail">E-mail</label>
+    <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required autofocus autocomplete="off" />
+  </div>
+  <div class="input-options">
+    <label for="userPW">password</label>
+    <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off" autofocus />
+  </div>
+  <div class="btn-wrap">
+    <button type="button" onclick="login()"></button>
+  </div>
+  </div>
+
+  <script>
+
+    function login() {
+      $.ajax({
+        type: "POST",
+        url: "/login",
+        data: {
+          id_give: $('#userMail').val(),
+          pw_give: $('#userPW').val()
+        },
+        success: function (response) {
+          if (response['result'] == 'success') {
+            // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
+            // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
+            $.cookie('mytoken', response['token']);
+
+            alert('로그인 완료!')
+            window.location.href = '/'
+          } else {
+            // 로그인이 안되면 에러메시지를 띄웁니다.
+            alert(response['msg'])
+          }
+        }
+      })
+    }
+
+  </script>
+
+</body>
+
+</html>

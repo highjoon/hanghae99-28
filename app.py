@@ -82,6 +82,9 @@ def api_sign_in():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
+@app.route('/login')
+def log_in():
+    return render_template("logIn.html")
 
 
 @app.route('/api/nick', methods=['GET'])
