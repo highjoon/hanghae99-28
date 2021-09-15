@@ -61,6 +61,10 @@
 </section>
 <script src="{{ url_for('static',filename='js/main.js') }}"></script>
 <script>
+    $('.home__title').click(function () {
+        location.reload();
+    });
+
     let camps = {{camps | tojson}};
     let reviews = {{reviews | tojson}};
     let campList = [];
@@ -74,9 +78,7 @@
         updateAvg(cards);
     });
 
-    $('.home__title').click(function () {
-        location.reload();
-    });
+
 
     $('.home__form--input').on("keyup", function (key) {
         if (key.keyCode === 13) {

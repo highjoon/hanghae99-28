@@ -109,6 +109,10 @@ p {
     z-index: 1;
 }
 
+.navbar {
+    text-align: center;
+}
+
 .navbar__menu {
     display: flex;
 }
