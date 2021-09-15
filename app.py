@@ -14,7 +14,7 @@ SECRET_KEY = "lambong1"
 
 app.config.from_pyfile('config.py')
 
-
+# Main Page
 @app.route('/')
 def main():
     camps = list(db.detail.find({}, {'_id': False}))
@@ -22,28 +22,7 @@ def main():
     return render_template("index.html", camps=camps, reviews=reviews)
 
 
-@app.route('/api/sign_in', methods=['GET'])  # 실제 DB에 대조하는 곳
-def api_sign_in():
-    id_receive = request.form['id_give']  # ID 기존으로 받아줌
-    pw_receive = request.form['pw_give']  # PW 해시처리해서 암호화해서 받아줌
-
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()  # hash값 생성
-    result = db.user.find_one({'id': id_receive, 'pw': pw_hash})  # 매칭 안되면
-
-    if result is not None:
-        payload = {
-            'id': id_receive,  # login.html 에서 로그인 성공해서 토큰값 발행되면 실행되서 결과값 나오는곳
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 2)
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        {"typ": "JWT", "alg": "HS256"}
-
-        return jsonify({'result': 'success', 'token': token})
-
-    else:
-        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-
+# Review Page
 @app.route('/api/review/<keyword>')
 def review(keyword):
     camps = list(db.detail.find({'id': keyword}, {'_id': False}))
@@ -77,6 +56,31 @@ def review_post():
         return jsonify({'result': 'success', 'msg': '리뷰 전송 완료!'})
     except:
         return jsonify({'result': 'success', 'msg': '실패!'})
+
+
+# Login Page
+
+@app.route('/api/sign_in', methods=['GET'])  # 실제 DB에 대조하는 곳
+def api_sign_in():
+    id_receive = request.form['id_give']  # ID 기존으로 받아줌
+    pw_receive = request.form['pw_give']  # PW 해시처리해서 암호화해서 받아줌
+
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()  # hash값 생성
+    result = db.user.find_one({'id': id_receive, 'pw': pw_hash})  # 매칭 안되면
+
+    if result is not None:
+        payload = {
+            'id': id_receive,  # login.html 에서 로그인 성공해서 토큰값 발행되면 실행되서 결과값 나오는곳
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 2)
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        {"typ": "JWT", "alg": "HS256"}
+
+        return jsonify({'result': 'success', 'token': token})
+
+    else:
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
 
 
 @app.route('/api/nick', methods=['GET'])

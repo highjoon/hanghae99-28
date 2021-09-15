@@ -38,43 +38,40 @@ function find_camp() {
 }
 
 function updateAvg(cards) {
-    cards.forEach(card => {
+    cards.forEach((card) => {
         let temp_id = card.id;
         let originAvg = card.children[2];
         for (let id in idList) {
             if (id === temp_id) originAvg.innerHTML = idList[id];
         }
-    })
+    });
 }
 
 function calculateAvg(campList) {
-    campList.forEach(camp => {
+    campList.forEach((camp) => {
         let tempAvg = 0;
-        reviews.forEach(review => {
-            if (review['campId'] === camp['id']) {
-                tempAvg += Number(review['avg'])
+        reviews.forEach((review) => {
+            if (review["campId"] === camp["id"]) {
+                tempAvg += Number(review["avg"]);
             }
-        })
-        idList[camp['id']] = tempAvg;
-    })
+        });
+        idList[camp["id"]] = tempAvg;
+    });
 }
 
 function createIdList(camps) {
-    camps.forEach(camp => {
-        idList[camp['id']] = null;
+    camps.forEach((camp) => {
+        idList[camp["id"]] = null;
     });
 }
 
 function createCampList(camps) {
-    camps.forEach(camp => {
+    camps.forEach((camp) => {
         campList.push(camp);
     });
-<<<<<<< HEAD
-=======
 }
 
 function showError() {
     alert('잘못된 입력입니다!');
     document.querySelector(".home__form--input").value = '';
->>>>>>> 89d1bb47871f6914346308ea8b208e46b07dbfb3
 }
