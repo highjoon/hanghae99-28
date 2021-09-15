@@ -16,7 +16,6 @@ bcrypt = Bcrypt(app)
 client = MongoClient(MONGODB_HOST, 27017)
 db = client.dbsparta_28
 
-# 시크릿키, 만료일, 디비 주소 환경변수 설정할 것
 # SECRET_KEY = 'SPARTA'
 
 @app.route('/')
@@ -66,22 +65,22 @@ def save_userinfo():
             return render_template("signUp.html")
 
         users = db.users
-        chk_dup = users.find({"mailId": mailId}).count()
+        dup_mail = users.find_one({"mailId": mailId})
+        dup_name = users.find_one({"nickname": nickName})
 
-        if chk_dup > 0:
-            flash("이미 가입된 메일 주소입니다.")
+        if dup_mail:
+            flash("이미 등록된 메일 주소입니다.")
             return render_template("logIn.html")
+
+            # message = "이미 등록된 메일 주소입니다."
+            # return render_template("logIn.html", message=message)
+        if dup_name:
+            flash("이미 사용중인 닉네임입니다.")
+            return render_template("signUp.html")
+
 
         # hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hashed_pw = hashlib.sha256(password.encode('utf-8')).hexdigest()
-
-        # user = {
-        #     "E-mail": mailId,
-        #     "password": hashed_pw,
-        #     "nickname": nickName,
-        #     "Bootcamp": bootCamp,
-        #     "has_CS-major": major,
-        # }
 
         user = {
             "mailId": mailId,

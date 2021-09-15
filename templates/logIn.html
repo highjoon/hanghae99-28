@@ -14,17 +14,21 @@
 </head>
 <body>
     <div class="container">
-    <div class="input-options">
-      <label for="userMail">E-mail</label>
-      <input id="userMail" type="email" placeholder="이메일을 입력해 주세요" pattern=".+@globex\.com" required autofocus />
-    </div>
-    <div class="input-options">
-      <label for="userPW">password</label>
-      <input id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off" autofocus />
-    </div>
+<form action="" method="POST">
+      <div class="input-options">
+        <label for="userMail">E-mail</label>
+        <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
+          autofocus autocomplete="off"/>
+      </div>
+      <div class="input-options">
+        <label for="userPW">password</label>
+        <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
+          autofocus />
+      </div>
         <div class="btn">
             <button id="btn">로그인</button>
         </div>
+</form>
     </div>
     <script>
         const loginBtn = document.getElementById("#btn");
