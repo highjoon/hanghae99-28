@@ -29,21 +29,6 @@
     <script>
     </script>
 </head>
-<script>
-// {% for camp in camps %}
-//         <div class="card" onclick="window.location.href = '/review'" id={{ camp['id'] }}>
-//             <img src="static/img/{{ camp['boot_img'] }}" alt="{{ camp['name'] }}" id="boot_img"/>
-//             <p class="boot_name" id="boot_name">{{ camp['name'] }}</p>
-//             <p class="avg_grade">3.5</p>
-//         </div>
-//     {% endfor %}
-
-
-
-</script>
-
-
-
 <body>
 <!-- Navbar -->
 <nav id="navbar">
@@ -56,11 +41,10 @@
 <!-- Home -->
 <section id="home">
     <div class="home__container">
-        <h1 class="home__title" onclick = "window.location.href = '/'">What is your choice?</h1>
+        <h1 class="home__title">What is your choice?</h1>
     </div>
 </section>
 <section id="review">
-    {% for camp in camps %}
     <div class="review__detail">
         <div class="review__detail--container">
             {% for camp in camps %}
