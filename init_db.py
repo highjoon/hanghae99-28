@@ -104,4 +104,4 @@ doc = [
      }
 ]
 
-db.review.insert_many(doc)
+db.detail.insert_many(doc)
