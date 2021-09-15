@@ -45,7 +45,7 @@
     <div class="home__container">
         <h1 class="home__title">What is your choice?</h1>
         <input class="home__form--input" id="boot_search" type="text" placeholder="부트캠프를 검색해주세요"/>
-        <button class="home__form--btn" onclick="find_camp()">검색</button>
+        <button class="home__form--btn">검색</button>
     </div>
 </section>
 <section id="main">
@@ -70,20 +70,24 @@
     let campList = [];
     let idList = {};
     let cards = document.querySelectorAll('.card');
+    let searchBtn = document.querySelector('.home__form--btn');
+
+
+    searchBtn.addEventListener('click', () => {
+        find_camp();
+    })
+
+    $('.home__form--input').on("keyup", function (key) {
+        if (key.keyCode === 13) {
+            find_camp();
+        }
+    });
 
     $(document).ready(function () {
         createIdList(camps);
         createCampList(camps);
         calculateAvg(campList);
         updateAvg(cards);
-    });
-
-
-
-    $('.home__form--input').on("keyup", function (key) {
-        if (key.keyCode === 13) {
-            find_camp();
-        }
     });
 </script>
 
