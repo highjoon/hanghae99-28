@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8f7f226c-67f8-4d95-adbc-6cec40f51b52" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hanghae99-28" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/mini.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mini.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
@@ -64,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1631700615899</updated>
-      <workItem from="1631700618671" duration="439000" />
+      <workItem from="1631700618671" duration="687000" />
     </task>
     <servers />
   </component>
