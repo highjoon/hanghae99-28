@@ -26,7 +26,8 @@ def main():
 @app.route('/api/review/<keyword>')
 def review(keyword):
     camps = list(db.detail.find({'id': keyword}, {'_id': False}))
-    return render_template("review.html", camps=camps, keyword=keyword)
+    reviews = list(db.review.find({'campId': keyword}, {'_id': False}))
+    return render_template("review.html", camps=camps, keyword=keyword, reviews=reviews)
 
 
 @app.route('/api/review/', methods=['POST'])
