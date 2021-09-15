@@ -70,13 +70,3 @@ function showError() {
     alert("잘못된 입력입니다!");
     document.querySelector(".home__form--input").value = "";
 }
-
-let navbar = document.querySelector("#navbar");
-let navbarHeight = navbar.getBoundingClientRect().height;
-document.addEventListener("scroll", () => {
-    if (window.scrollY > navbarHeight) {
-        navbar.classList.add("navbar--dark");
-    } else {
-        navbar.classList.remove("navbar--dark");
-    }
-});
