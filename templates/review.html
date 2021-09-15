@@ -26,8 +26,7 @@
     ></script>
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
     <script src="{{ url_for('static',filename='js/main.js') }}"></script>
-    <script>
-    </script>
+    <script src="{{ url_for('static',filename='js/review.js') }}"></script>
 </head>
 <body>
 <!-- Navbar -->
@@ -62,7 +61,8 @@
         </div>
 
         <div class="review__write">
-                    <span>
+            {#            <form class="comment__form">#}
+            <span id="overall">
                         만족도
                         <input type="radio" id="overall1" name="review_overall" value="review_overall"/>
                         <label for="overall1">1</label>
@@ -75,7 +75,7 @@
                         <input type="radio" id="overall5" name="review_overall" value="review_overall"/>
                         <label for="overall5">5</label>
                     </span>
-            <span>
+            <span id="period">
                         기간
                         <input type="radio" id="period1" name="reivew_period" value="reivew_period"/>
                         <label for="period1">1</label>
@@ -88,7 +88,7 @@
                         <input type="radio" id="period5" name="reivew_period" value="reivew_period"/>
                         <label for="period5">5</label>
                     </span>
-            <span>
+            <span id="recommend">
                         추천 의향
                         <input type="radio" id="recommend1" name="review_recommend" value="review_recommend"/>
                         <label for="recommend1">1</label>
@@ -101,7 +101,7 @@
                         <input type="radio" id="recommend5" name="review_recommend" value="review_recommend"/>
                         <label for="recommend5">5</label>
                     </span>
-            <span>
+            <span id="tuition">
                         비용
                         <input type="radio" id="tuition1" name="review_tuition" value="review_tuition"/>
                         <label for="tuition1">1</label>
@@ -114,10 +114,10 @@
                         <input type="radio" id="tuition5" name="review_tuition" value="review_tuition"/>
                         <label for="tuition5">5</label>
                     </span>
-            <form action="POST" class="comment__form">
-                <textarea name="review_comment" form="inform" id="review_comment" cols="90" rows="4"></textarea>
-                <button class="review__btn">등록</button>
-            </form>
+
+            <textarea name="review_comment" form="inform" id="review_comment" cols="90" rows="4"></textarea>
+            <button class="review__btn">등록</button>
+            {#            </form>#}
         </div>
         <div id="review__list">
             <div class="reveiw__list--col">
@@ -190,6 +190,59 @@
 </section>
 <script>
     let camps = {{camps | tojson}}[0];
+
+    let campId = document.querySelector('.boot_logo').getAttribute('id');
+    let author = null;
+
+    let overalls = document.querySelectorAll('#overall > label');
+    let periods = document.querySelectorAll('#period > label');
+    let recommends = document.querySelectorAll('#recommend > label');
+    let tuitions = document.querySelectorAll('#tuition > label');
+    let commentBox = document.querySelector('#review_comment');
+    let submitBtn = document.querySelector('.review__btn');
+
+    clickEvent(overalls);
+    clickEvent(periods);
+    clickEvent(recommends);
+    clickEvent(tuitions);
+
+    let reviewList = {
+        overall: null,
+        period: null,
+        recommend: null,
+        tuition: null,
+        comment: "",
+    };
+
+    let overall, period, recommend, tuition, avg = null;
+    let comment = '';
+
+    submitBtn.addEventListener('click', () => {
+        getCommentReview();
+        seperateReviewList(reviewList);
+        postReview();
+    })
+
+    function postReview() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/review/post',
+            data: {
+                author_give: author,
+                campId_give: campId,
+                overall_give: overall,
+                period_give: period,
+                recommend_give: recommend,
+                tuition_give: tuition,
+                comment_give: comment,
+                avg_give: avg,
+            },
+            success: function (response) {
+                alert(response['msg']);
+                location.reload();
+            }
+        })
+    }
 </script>
 </body>
 </html>
