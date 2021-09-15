@@ -48,8 +48,8 @@
     <div class="review__detail">
         <div class="review__detail--container">
             {% for camp in camps %}
-                <img src="{{ url_for('static', filename='img/'+ camp['boot_img'])}}" alt="codesquad" id={{ camp['id'] }}
-                     class="boot_logo"/>
+                <img src={{ url_for('static', filename='img/' + camp['boot_img']) }} alt={{ camp['id'] }}
+                     id={{ camp['id'] }} class="boot_logo"/>
                 <div class="review__detail--info">
                     <a href={{ camp['link'] }} id="boot_name">{{ camp['name'] }}</a>
                     <p>지향 : <span id="direction">{{ camp['direction'] }}</span></p>
@@ -121,14 +121,12 @@
         </div>
         <div id="review__list">
             <div class="reveiw__list--col">
-                <div class="index"><span>1</span></div>
                 <div class="nickname"><span>홍길동</span></div>
                 <div class="comment">
                     <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias, dolores.</span>
                 </div>
             </div>
             <div class="reveiw__list--col">
-                <div class="index">2</div>
                 <div class="nickname">홍길동</div>
                 <div class="comment">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Id recusandae illo nisi, eaque mollitia
@@ -139,7 +137,6 @@
                 </div>
             </div>
             <div class="reveiw__list--col">
-                <div class="index">3</div>
                 <div class="nickname">홍길동</div>
                 <div class="comment">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, dignissimos explicabo quaerat
@@ -192,9 +189,6 @@
     </div>
 </section>
 <script>
-    $('.home__title').click(function () {
-        location.reload();
-    });
     let camps = {{camps | tojson}}[0];
 </script>
 </body>
