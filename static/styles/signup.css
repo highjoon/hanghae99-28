@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding: 10px;
+  margin: 20px;
+}
+
+.input-text {
+  width: 300px;
+  padding: 10px;
+  margin: 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+button {
+  width: 150px;
+  padding: 10px;
+  margin: 20px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 3px;
+  overflow: hidden;
+  transition: 0.4s ease-in;
+  z-index: 1;
+}
+
+button::before,
+button::after {
+  background: #ff96ad;
+  content: "";
+  z-index: -1;
+}
+
+.btn:hover {
+  border: 2px solid #ff96ad;
+  color: #ff96ad;
+  background-color: #17181c;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

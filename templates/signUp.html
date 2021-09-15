@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/signup.css' ) }}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <title>What's Your Choices?</title>
+
+{#    <meta property="og:title" content="What's Your Choices?"/>#}
+{#    <meta property="og:description" content="부트캠프를 선택하는 당신의 기준은?"/>#}
+{#    <meta property="og:image" content="{{ url_for('static', filename='hanghae99logo.svg') }}"/>#}
+</head>
+<body>
+  <div class="container">
+    <form action="" method="POST">
+      <div class="input-options">
+        <label for="userMail">E-mail</label>
+        <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
+          autofocus autocomplete="off"/>
+      </div>
+      <div class="input-options">
+        <label for="userPW">password</label>
+        <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
+          autofocus />
+      </div>
+      <div class="input-options">
+        <label for="userName">Nickname</label>
+        <input name="nickName" id="userName" type="text" placeholder="닉네임을 입력해 주세요" required autocomplete="off" />
+      </div>
+      <div class="input-options">
+        <label for="userCamp">Bootcamp</label>
+        <input name="bootCamp" id="userCamp" type="text" placeholder="수료한 부트캠프명을 입력해 주세요" autocomplete="off" />
+      </div>
+      <div class="input-options">
+        <input type="radio" id="CS-major" name="hasCsMajor" value="true" checked />
+        <label for="CS-major">컴퓨터 관련 전공</label>
+        <input type="radio" id="non-major" name="hasCsMajor" value="false" />
+        <label for="non-major">비전공</label>
+      </div>
+      <div class="btn-wrap">
+          <button class="btn" type="submit">가입하기</button>
+      </div>
+    </form>
+  </div>
+    <script>
+        {#function save_userInfo() {#}
+        {#        $.ajax({#}
+        {#            type: "POST",#}
+        {#            url: "/signup",#}
+        {#            data: {#}
+        {#                mail_give: $('#userMail').val(),#}
+        {#                pw_give: $('#userPW').val(),#}
+        {#                nickname_give: $('#userName').val(),#}
+        {#                camp_give: $('#userCamp').val(),#}
+        {#                major_give: $('input:radio[name="userMajor"]:checked').val()#}
+        {#            },#}
+        {#            success: function (response) {#}
+        {#                if (response['result'] == 'success') {#}
+        {#                    alert('회원가입이 완료되었습니다.')#}
+        {#                    window.location.href = '/login'#}
+        {#                } else {#}
+        {#                    alert(response['msg'])#}
+        {#                }#}
+        {#            }#}
+        {#        })#}
+        {#    }#}
+    </script>
+  </body>
+</html>

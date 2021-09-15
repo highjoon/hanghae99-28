@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/logIn.css' ) }}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <title>What's Your Choices?</title>
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+    <div class="input-options">
+      <label for="userMail">E-mail</label>
+      <input id="userMail" type="email" placeholder="이메일을 입력해 주세요" pattern=".+@globex\.com" required autofocus />
+    </div>
+    <div class="input-options">
+      <label for="userPW">password</label>
+      <input id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off" autofocus />
+    </div>
+        <div class="btn">
+            <button id="btn">로그인</button>
+        </div>
+    </div>
+    <script>
+        const loginBtn = document.getElementById("#btn");
+
+        loginBtn.addEventListener()
+    </script>
+</body>
+</html>
