@@ -317,16 +317,14 @@ p {
     border-bottom: 2px solid var(--color-black);
 }
 
-.reveiw__list--col .index {
-    flex-basis: 10%;
-}
-
 .reveiw__list--col .nickname {
-    flex-basis: 20%;
+    flex-basis: 30%;
+    text-align: center;
 }
 
 .reveiw__list--col .comment {
-    flex-basis: 80%;
+    flex-basis: 70%;
+    text-align: left;
 }
 
 .show {
