@@ -50,32 +50,36 @@
 </section>
 <section id="main">
     {% for camp in camps %}
-    
         <div class="card" onclick="window.location.href = '/api/review/{{ camp['id'] }}'" id={{ camp['id'] }}>
             <img src="static/img/{{ camp['boot_img'] }}" alt="{{ camp['name'] }}" id="boot_img"/>
             <p class="boot_name" id="boot_name">{{ camp['name'] }}</p>
-            <p class="avg_grade">3.5</p>
+            <p class="avg_grade">0</p>
         </div>
     {% endfor %}
 
-    
+
 </section>
 <script src="{{ url_for('static',filename='js/main.js') }}"></script>
 <script>
     let camps = {{camps | tojson}};
     let reviews = {{reviews | tojson}};
-
     let campList = [];
-    for (let i = 0; i < camps.length; i++) {
-        campList.push(camps[i]);
-    }
+    let idList = {};
+    let cards = document.querySelectorAll('.card');
+
+    $(document).ready(function () {
+        createIdList(camps);
+        createCampList(camps);
+        calculateAvg(campList);
+        updateAvg(cards);
+    });
 
     $('.home__title').click(function () {
         location.reload();
     });
 
     $('.home__form--input').on("keyup", function (key) {
-        if (key.keyCode == 13) {
+        if (key.keyCode === 13) {
             find_camp();
         }
     });
