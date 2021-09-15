@@ -4,7 +4,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Login</title>
-    <meta name="description" content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
+    <meta name="description"
+          content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
     <meta name="author" content="hanghae99-28"/>
     <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -12,37 +13,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <style>
     .wrap {
         margin: auto;
-       text-align: center;
+        text-align: center;
     }
+
     .login_btn {
         width: 300px;
         text-align: center;
         margin-top: 20px;
     }
-     .mytitle {
 
-         background-size: auto;
+    .mytitle {
+
+        background-size: auto;
     }
+
     .login {
         width: 300px;
         margin: auto;
         text-align: center;
     }
-    .btn btn-primary{
 
+    .btn-primary {
     }
+
+    .is-primary {
+        width: 60%;
+    }
+
 </style>
 <script>
-            // {% if msg %} 진자로 변형하는거 팁같음
-            //     alert("{{ msg }}") 어디에 적용시킬지..
-            //  {% endif %}
+    // {% if msg %} 진자로 변형하는거 팁같음
+        //     alert("{{ msg }}") 어디에 적용시킬지..
+        //  {% endif %}
 
-       function is_email(asValue) {
+    function is_email(asValue) {
         var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
         return regExp.test(asValue);
     }
@@ -53,8 +63,10 @@
     }
 
     function sign_in() {       // 32~49 빈값일대 알럿을 출력함 검증 요청 부분
-        let {{ usermail }} = $("#input-username").val()
-        let {{ password }} = $("#input-password").val()
+        let {{ usermail }} =
+        $("#input-username").val()
+        let {{ password }} =
+        $("#input-password").val()
 
         {%  if (usermail == "") %}
             $("#help-id-login").text("E-mail을 입력해주세요.")
@@ -75,43 +87,62 @@
             type: "POST", //
             url: "/sign_in",
             data: {
-                usermail_give:{{ usermail }} ,
+                usermail_give:{{ usermail }},
                 password_give:{{ password }}
-        },                                      //브라우저 쿠키에 저장 쿠키=브라우저 DB 같은거 키-밸류 형태로 저장
+            },                          //브라우저 쿠키에 저장 쿠키=브라우저 DB 같은거 키-밸류 형태로 저장
             success: function {{ response }} {  //검증 통과시 토큰 받음 검증ID, 유효시간
                 {% if (response['result'] == 'success') %}
                     $.cookie('mytoken', response['token'], {path: '/'}); // mytoken 실제 서버가 발행한 토큰
+                    alert(response[{{ '로그인 완료' }}])
                     window.location.replace("/")
                 {% else %}
-                    alert(response[{{ '로그인 완료' }}])
+                    alert(response[{{ '로그인 실패' }}])
+                    window.location.reload()
                 {% endif %}
             }
         });
     }
 </script>
 <body>
-    <div id="navbar">
-        <ul class="navbar__menu">
-            <li class="navbar__menu__item active" data-link="#home">로그인</li>
-            <li class="navbar__menu__item" data-link="#about">회원가입</li>
-        </ul>
+<div id="navbar">
+    <ul class="navbar__menu">
+        <li class="navbar__menu__item active" data-link="#home">로그인</li>
+        <li class="navbar__menu__item" data-link="#about">회원가입</li>
+    </ul>
+</div>
+<form method=get action=activate.php>
+    <div class="section has-text-centered">
+        <h1 class="title">What is your choice?</h1>
+        <div class="container" style="width:60%">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" for="userid">E-mail</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input type="text" class="input" id="userid" aria-describedby="emailHelp"
+                                   placeholder="E-mail을 입력해주세요">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" for="userpw">비밀번호</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input type="password" class="input" id="userpw" placeholder="비밀번호를 입력해 주세요">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p><button class="button is-primary" onclick="window.location()">로그인</button><p>
+        </div>
     </div>
-    <div class="wrap">
-            <h1 class="mytitle">What is your choice?</h1>
-          <div class="login">
-              <div class="form-group">
-               <p>E-mail<label for="exampleInputEmail1" ></label></p>
-                <input type="email" class="form-control" id="is_email" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted"></small>
-              </div>
-              <div class="form-group">
-              <p>비밀번호<label for="exampleInputPassword1"></label></p>
-                <input type="password" class="form-control" id="is_password" id="exampleInputPassword1" >
-              </div>
-          </div>
-          <input class="btn btn-primary" type="submit" value="로그인" onclick=window.location('index.html')>
-    </div>
-
+</form>
 </body>
 </html>
 

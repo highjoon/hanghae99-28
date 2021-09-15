@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
 db = client.dbsparta_28
-SECRET_KEY = "lambong"
+SECRET_KEY = "lambong1"
 import jwt
 import datetime
 import hashlib
