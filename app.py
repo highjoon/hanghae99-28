@@ -14,6 +14,7 @@ SECRET_KEY = "lambong1"
 
 app.config.from_pyfile('config.py')
 
+
 # Main Page
 @app.route('/')
 def main():
@@ -41,6 +42,29 @@ def review_post():
     comment_receive = request.form['comment_give']
     avg_receive = request.form['avg_give']
 
+    # DB안에 저장되어있는 특정 부트캠프의 평점 총합.
+    total = 0
+    # DB안에 저장되어있는 특정 부트캠프의 리뷰 갯수.
+    cnt = 0
+
+    review_count = list(db.review.find({'campId': campId_receive}, {'_id': False}))
+    for count in review_count:
+        total = total + float(count['avg'])
+        if count['campId'] == campId_receive:
+            cnt += 1
+
+    # DB안에 특정 부트캠프의 리뷰가 없다면 avg_count는 처음 받은 평균으로 저장.
+    if cnt == 0:
+        avg_count = float(avg_receive)
+    else:
+        # DB안에 특정 부트캠프의 리뷰가 있다면 avg_count는 평점 총합 / 리뷰 갯수
+        cnt += 1
+        total += float(avg_receive)
+        avg_count = total / cnt
+
+    print(avg_count)
+
+    # 평균 구해지면 return 값으로 평균을 html로 전달.
     doc = {
         'author': author_receive,
         'campId': campId_receive,
@@ -51,7 +75,6 @@ def review_post():
         'comment': comment_receive,
         'avg': avg_receive,
     }
-
     db.review.insert_one(doc)
     try:
         return jsonify({'result': 'success', 'msg': '리뷰 전송 완료!'})
@@ -81,7 +104,6 @@ def api_sign_in():
 
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
 
 
 @app.route('/api/nick', methods=['GET'])
