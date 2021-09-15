@@ -7,10 +7,14 @@
     <meta name="description"
           content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
     <meta name="author" content="hanghae99-28"/>
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,7 +39,7 @@
 <!-- Navbar -->
 <nav id="navbar">
     <ul class="navbar__menu">
-        <li class="navbar__menu__item active" data-link="#home">로그인</li>
+        <li class="navbar__menu__item" data-link="#home">로그인</li>
         <li class="navbar__menu__item" data-link="#about">회원가입</li>
     </ul>
 </nav>
@@ -68,24 +72,23 @@
     let camps = {{camps | tojson}};
     let reviews = {{reviews | tojson}};
     let campList = [];
-    let idList = {};
+    let avgList = {};
     let cards = document.querySelectorAll('.card');
     let searchBtn = document.querySelector('.home__form--btn');
-
+    let searchInput = document.querySelector('.home__form--input');
 
     searchBtn.addEventListener('click', () => {
         find_camp();
     })
 
-    $('.home__form--input').on("keyup", function (key) {
+    searchBtn.addEventListener("keyup", (key) => {
         if (key.keyCode === 13) {
             find_camp();
         }
     });
 
     $(document).ready(function () {
-        createIdList(camps);
-        createCampList(camps);
+        createAvgList(camps);
         calculateAvg(campList);
         updateAvg(cards);
     });

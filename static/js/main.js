@@ -33,7 +33,7 @@ function find_camp() {
         });
     } else {
         showError();
-        camp.innerText = '';
+        camp.innerText = "";
     }
 }
 
@@ -41,8 +41,8 @@ function updateAvg(cards) {
     cards.forEach((card) => {
         let temp_id = card.id;
         let originAvg = card.children[2];
-        for (let id in idList) {
-            if (id === temp_id) originAvg.innerHTML = idList[id];
+        for (let id in avgList) {
+            if (id === temp_id) originAvg.innerHTML = avgList[id];
         }
     });
 }
@@ -55,23 +55,28 @@ function calculateAvg(campList) {
                 tempAvg += Number(review["avg"]);
             }
         });
-        idList[camp["id"]] = tempAvg;
+        avgList[camp["id"]] = tempAvg;
     });
 }
 
-function createIdList(camps) {
+function createAvgList(camps) {
     camps.forEach((camp) => {
-        idList[camp["id"]] = null;
-    });
-}
-
-function createCampList(camps) {
-    camps.forEach((camp) => {
+        avgList[camp["id"]] = null;
         campList.push(camp);
     });
 }
 
 function showError() {
-    alert('잘못된 입력입니다!');
-    document.querySelector(".home__form--input").value = '';
+    alert("잘못된 입력입니다!");
+    document.querySelector(".home__form--input").value = "";
 }
+
+let navbar = document.querySelector("#navbar");
+let navbarHeight = navbar.getBoundingClientRect().height;
+document.addEventListener("scroll", () => {
+    if (window.scrollY > navbarHeight) {
+        navbar.classList.add("navbar--dark");
+    } else {
+        navbar.classList.remove("navbar--dark");
+    }
+});
