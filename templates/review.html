@@ -118,13 +118,16 @@
             <button class="review__btn">등록</button>
         </div>
         <div id="review__list">
-            <div class="reveiw__list--col">
-                <div class="nickname"><span>홍길동</span></div>
-                <div class="comment">
-                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias, dolores.</span>
-                </div>
-            </div>
-            <div class="reveiw__list--col">
+            {% for review in reviews %}
+                <div class="reveiw__list--col">
+                    <div class="nickname"><span> {{ nickname }}</span></div>
+                    <div class="comment">
+                        <span>{{ review.comment }}</span>
+                    </div>
+                </div>    
+            {% endfor %}
+            
+            <!-- <div class="reveiw__list--col">
                 <div class="nickname">홍길동</div>
                 <div class="comment">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Id recusandae illo nisi, eaque mollitia
@@ -182,12 +185,13 @@
                     culpa? Quibusdam at fugit quia deleniti, beatae provident rem laborum pariatur nostrum. Ut eveniet
                     provident minima, a libero maxime quibusdam fugiat!
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
 <script>
     let camps = {{camps | tojson}}[0];
+    let reviews = {{reviews | tojson}}[0];
 
     let campId = document.querySelector('.boot_logo').getAttribute('id');
     let author = null;
