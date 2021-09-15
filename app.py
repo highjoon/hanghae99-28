@@ -17,7 +17,8 @@ app.config.from_pyfile('config.py')
 @app.route('/')
 def main():
     camps = list(db.detail.find({}, {'_id': False}))
-    return render_template("index.html", camps=camps)
+    reviews = list(db.review.find({}, {'_id': False}))
+    return render_template("index.html", camps=camps, reviews=reviews)
 
 
 @app.route('/api/review/<keyword>')
@@ -26,15 +27,6 @@ def review(keyword):
     return render_template("review.html", camps=camps, keyword=keyword)
 
 
-<<<<<<< HEAD
-
-
-# @app.route('/api/review/<keyword>' methods=['GET'])
-# def show_review(keyword):
-#     reviews = list(db.review.find({'': keyword}, {'_id': False}))
-#     return render_template("review.html", keyword=keyword, reviews=reviews)
-
-=======
 @app.route('/api/review/post', methods=['POST'])
 def review_post():
     author_receive = request.form['author_give']
@@ -62,7 +54,6 @@ def review_post():
         return jsonify({'result': 'success', 'msg': '리뷰 전송 완료!'})
     except:
         return jsonify({'result': 'success', 'msg': '실패!'})
->>>>>>> 28855a19e89c3f6ce305d150fbd95c3b8dbe7660
 
 
 if __name__ == '__main__':
