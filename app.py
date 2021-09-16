@@ -7,16 +7,17 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, f
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 
-# app.config.from_pyfile('setting.py')
 from setting import MONGODB_HOST, SECRET_KEY
+
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+app.config.from_pyfile('setting.py')
+
 client = MongoClient(MONGODB_HOST, 27017)
 db = client.dbsparta_28
 
-# SECRET_KEY = 'SPARTA'
 
 @app.route('/')
 def render_main():
@@ -31,24 +32,6 @@ def log_in():
 @app.route('/signup')
 def sign_up():
     return render_template("signUp.html")
-
-# @app.route('/signup', methods=["GET", "POST"])
-# def save_userinfo():
-#     usermail_receive = request.form['mail_give']
-#     userPW_receive = request.form['pw_give']
-#     username_receive = request.form['nickname_give']
-#     usercamp_receive = request.form['camp_give']
-#     usermajor_receive = request.form['major_give']
-#     hashed_password = hashlib.sha256(userPW_receive.encode('utf-8')).hexdigest()
-#     user = {
-#         "mailId": usermail_receive,
-#         "password": hashed_password,
-#         "nickname": username_receive,
-#         "bootcamp": usercamp_receive,
-#         "computerMajor": usermajor_receive,
-#     }
-#     db.users.insert_one(user)
-#     return jsonify({'result': 'success'})
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -78,9 +61,11 @@ def save_userinfo():
             flash("이미 사용중인 닉네임입니다.")
             return render_template("signUp.html")
 
+        hashed_pw = bcrypt.generate_password_hash(password)
+        # bcrypt.check_password_hash(hashed_pw, password).decode('utf-8')
 
-        # hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        hashed_pw = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        # hashed_pw = bcrypt.generate_password_hash(password).decode(‘utf - 8’)
+        # hashed_pw = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
         user = {
             "mailId": mailId,
