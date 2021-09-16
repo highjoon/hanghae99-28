@@ -44,6 +44,7 @@ body {
     font-family: "Noto Sans KR", sans-serif;
     margin: 0;
     cursor: default;
+    background-color: var(--color-dark-grey);
 }
 
 a {
@@ -143,7 +144,6 @@ p {
     padding-top: 120px;
     justify-content: center;
     display: flex;
-    background-color: var(--color-dark-grey);
 }
 
 .home__container {
@@ -214,7 +214,6 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    background-color: var(--color-dark-grey);
 }
 
 .card {
@@ -251,7 +250,7 @@ p {
     border-radius: var(--size-border-radius);
 }
 
-/* Reivew Detail */
+/* Review */
 
 #review {
     display: flex;
@@ -260,12 +259,15 @@ p {
     justify-content: space-around;
 }
 
+/* Reivew Detail */
+
 .review__detail {
     width: 850px;
     margin: 0 auto;
     padding-top: 30px;
-    border: 2px solid var(--color-black);
     border-radius: var(--size-border-radius);
+    background-color: var(--color-white);
+    box-shadow: 0 0 10px var(--color-white);
 }
 
 .review__detail--container {
@@ -276,12 +278,11 @@ p {
 }
 
 .review__detail--container .boot_logo {
-    border: 1px solid black;
-    width: 300px;
     height: 300px;
     display: inline;
     float: left;
-    flex-basis: 30%;
+    flex-basis: 45%;
+    border-radius: var(--size-border-radius);
 }
 
 .review__detail--info {
@@ -304,7 +305,7 @@ p {
 /* Reivew Write */
 
 .review__write {
-    margin: 0 auto;
+    margin: 100px auto;
     width: 90%;
     text-align: center;
 }
@@ -332,12 +333,14 @@ p {
     padding: 2px 10px;
     display: inline-block;
     border: solid 1px var(--color-black);
+    border-radius: var(--size-border-radius);
     background-color: var(--color-white);
     text-align: center;
-    transition: all var(--animation-duration) ease-in-out;
     cursor: pointer;
+    transition: all var(--animation-duration) ease-in-out;
 }
 
+.review__write span input[type="radio"]:hover + label,
 .review__write span input[type="radio"]:checked + label {
     background-color: var(--color-grey);
     color: var(--color-white);
@@ -349,31 +352,40 @@ p {
     width: 600px;
     height: 90px;
     vertical-align: bottom;
+    border-radius: var(--size-border-radius);
 }
 
 .review__btn {
-    border: 2px solid var(--color-black);
-    border-radius: var(--size-border-radius);
     width: 90px;
     height: 90px;
+    font-size: var(--font-regular);
+    font-weight: var(--weight-bold);
     vertical-align: bottom;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border-radius: var(--size-border-radius);
+    transition: all var(--animation-duration) ease-in-out;
+}
+
+.review__btn:hover {
+    background-color: var(--color-dark-grey);
 }
 
 /* Reivew List */
 
-.reveiw__list--col {
+.review__list--col {
     display: flex;
     margin: 30px 30px;
     padding-bottom: 30px;
     border-bottom: 2px solid var(--color-black);
 }
 
-.reveiw__list--col .nickname {
+.review__list--col .nickname {
     flex-basis: 30%;
     text-align: center;
 }
 
-.reveiw__list--col .comment {
+.review__list--col .comment {
     flex-basis: 70%;
     text-align: left;
 }
