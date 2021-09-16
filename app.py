@@ -31,6 +31,7 @@ def review(keyword):
     return render_template("review.html", camps=camps, keyword=keyword, reviews=reviews)
 
 
+# Review Post
 @app.route('/api/review/', methods=['POST'])
 def review_post():
     author_receive = request.form['author_give']
@@ -41,28 +42,6 @@ def review_post():
     tuition_receive = request.form['tuition_give']
     comment_receive = request.form['comment_give']
     avg_receive = request.form['avg_give']
-
-    # DB안에 저장되어있는 특정 부트캠프의 평점 총합.
-    total = 0
-    # DB안에 저장되어있는 특정 부트캠프의 리뷰 갯수.
-    cnt = 0
-
-    review_count = list(db.review.find({'campId': campId_receive}, {'_id': False}))
-    for count in review_count:
-        total = total + float(count['avg'])
-        if count['campId'] == campId_receive:
-            cnt += 1
-
-    # DB안에 특정 부트캠프의 리뷰가 없다면 avg_count는 처음 받은 평균으로 저장.
-    if cnt == 0:
-        avg_count = float(avg_receive)
-    else:
-        # DB안에 특정 부트캠프의 리뷰가 있다면 avg_count는 평점 총합 / 리뷰 갯수
-        cnt += 1
-        total += float(avg_receive)
-        avg_count = total / cnt
-
-    print(avg_count)
 
     # 평균 구해지면 return 값으로 평균을 html로 전달.
     doc = {
@@ -80,6 +59,12 @@ def review_post():
         return jsonify({'result': 'success', 'msg': '리뷰 전송 완료!'})
     except:
         return jsonify({'result': 'success', 'msg': '실패!'})
+
+
+@app.route('/api/index/', methods=['GET'])
+def get_avg():
+    review_count = list(db.review.find({}, {'_id': False}))
+    return jsonify({'result': 'success', 'msg': '평점 평균 계산 완료!', 'review_count': review_count})
 
 
 # Login Page

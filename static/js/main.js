@@ -37,35 +37,6 @@ function find_camp() {
     }
 }
 
-function updateAvg(cards) {
-    cards.forEach((card) => {
-        let temp_id = card.id;
-        let originAvg = card.children[2];
-        for (let id in avgList) {
-            if (id === temp_id) originAvg.innerHTML = avgList[id];
-        }
-    });
-}
-
-function calculateAvg(campList) {
-    campList.forEach((camp) => {
-        let tempAvg = 0;
-        reviews.forEach((review) => {
-            if (review["campId"] === camp["id"]) {
-                tempAvg += Number(review["avg"]);
-            }
-        });
-        avgList[camp["id"]] = tempAvg;
-    });
-}
-
-function createAvgList(camps) {
-    camps.forEach((camp) => {
-        avgList[camp["id"]] = null;
-        campList.push(camp);
-    });
-}
-
 function showError() {
     alert("잘못된 입력입니다!");
     document.querySelector(".home__form--input").value = "";
