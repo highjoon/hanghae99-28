@@ -12,9 +12,6 @@
 
     <title>What's Your Choices?</title>
 
-{#    <meta property="og:title" content="What's Your Choices?"/>#}
-{#    <meta property="og:description" content="부트캠프를 선택하는 당신의 기준은?"/>#}
-{#    <meta property="og:image" content="{{ url_for('static', filename='hanghae99logo.svg') }}"/>#}
 </head>
 <body>
   <div class="container">
@@ -27,7 +24,8 @@
       <div class="input-options">
         <label for="userPW">password</label>
         <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
-          autofocus />
+          autofocus /><br>
+          <small>* password는 영문과 숫자, 특수문자를 포함한 8자리 이상의 문자열이어야 합니다.</small>
       </div>
       <div class="input-options">
         <label for="userName">Nickname</label>
@@ -48,28 +46,6 @@
       </div>
     </form>
   </div>
-    <script>
-        {#function save_userInfo() {#}
-        {#        $.ajax({#}
-        {#            type: "POST",#}
-        {#            url: "/signup",#}
-        {#            data: {#}
-        {#                mail_give: $('#userMail').val(),#}
-        {#                pw_give: $('#userPW').val(),#}
-        {#                nickname_give: $('#userName').val(),#}
-        {#                camp_give: $('#userCamp').val(),#}
-        {#                major_give: $('input:radio[name="userMajor"]:checked').val()#}
-        {#            },#}
-        {#            success: function (response) {#}
-        {#                if (response['result'] == 'success') {#}
-        {#                    alert('회원가입이 완료되었습니다.')#}
-        {#                    window.location.href = '/login'#}
-        {#                } else {#}
-        {#                    alert(response['msg'])#}
-        {#                }#}
-        {#            }#}
-        {#        })#}
-        {#    }#}
-    </script>
+{#  <script src="{{ url_for('static',filename='javascript/signup.js') }}"></script>#}
   </body>
 </html>

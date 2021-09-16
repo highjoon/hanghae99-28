@@ -1,20 +1,39 @@
 .container {
+  height: 800px;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 500px;
+  font-size: 17px;
+  align-items: center;
+}
+
+.input-options .btn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
-  padding: 10px;
-  margin: 20px;
-}
-
-.input-text {
   width: 300px;
   padding: 10px;
   margin: 20px;
   border-top: none;
   border-left: none;
   border-right: none;
+}
+input[type="password"] {
+  margin-bottom: 5px;
+}
+/* input:required:invalid {
+  border-color: #71b280;
+} */
+small {
+  text-align: center;
+  padding-left: 10px;
 }
 
 button {
@@ -42,7 +61,8 @@ button::after {
   background-color: #17181c;
 }
 
+/*
 a {
   text-decoration: none;
   color: black;
-}
+} */

@@ -1,14 +1,12 @@
 from pymongo import MongoClient
 import jwt
-import datetime
 import hashlib
 from flask_bcrypt import Bcrypt
-from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, make_response
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 
-from setting import MONGODB_HOST, SECRET_KEY
-
+from setting import MONGODB_HOST, WYC_SECRET_KEY
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -17,13 +15,26 @@ app.config.from_pyfile('setting.py')
 
 client = MongoClient(MONGODB_HOST, 27017)
 db = client.dbsparta_28
+app.secret_key = WYC_SECRET_KEY
+
+print('WYC_SECRET_KEY',MONGODB_HOST, WYC_SECRET_KEY)
+
+
+# @app.route('/')
+# def main():
+# camps = list(db.detail.find({}, {'_id': False}))
+# reviews = list(db.review.find({}, {'_id': False}))
+# return render_template("project_index.html", camps=camps, reviews=reviews)
 
 
 @app.route('/')
-def main():
-    camps = list(db.detail.find({}, {'_id': False}))
-    reviews = list(db.review.find({}, {'_id': False}))
-    return render_template("index.html", camps=camps, reviews=reviews)
+def render_main():
+    return render_template("index.html")
+
+
+@app.route('/login')
+def render_login():
+    return render_template("logIn.html")
 
 
 # Review Page
@@ -85,33 +96,6 @@ def review_post():
         return jsonify({'result': 'success', 'msg': '실패!'})
 
 
-@app.route('/login')
-def log_in():
-    return render_template("logIn.html")
-
-
-@app.route('/api/sign_in', methods=['GET'])  # 실제 DB에 대조하는 곳
-def api_sign_in():
-    id_receive = request.form['id_give']  # ID 기존으로 받아줌
-    pw_receive = request.form['pw_give']  # PW 해시처리해서 암호화해서 받아줌
-
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()  # hash값 생성
-    result = db.user.find_one({'id': id_receive, 'pw': pw_hash})  # 매칭 안되면
-
-    if result is not None:
-        payload = {
-            'id': id_receive,  # login.html 에서 로그인 성공해서 토큰값 발행되면 실행되서 결과값 나오는곳
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 2)
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        {"typ": "JWT", "alg": "HS256"}
-
-        return jsonify({'result': 'success', 'token': token})
-
-    else:
-        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-
 @app.route('/signup')
 def sign_up():
     return render_template("signUp.html")
@@ -144,11 +128,8 @@ def save_userinfo():
             flash("이미 사용중인 닉네임입니다.")
             return render_template("signUp.html")
 
-        hashed_pw = bcrypt.generate_password_hash(password)
-        # bcrypt.check_password_hash(hashed_pw, password).decode('utf-8')
-
-        # hashed_pw = bcrypt.generate_password_hash(password).decode(‘utf - 8’)
-        # hashed_pw = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
+        # hashed_pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
         user = {
             "mailId": mailId,
@@ -160,8 +141,56 @@ def save_userinfo():
 
         users.insert_one(user)
         flash("회원가입이 완료되었습니다. 로그인 창으로 이동합니다.")
-        print(user)
         return render_template("logIn.html")
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+            mailId = request.form.get("mailId")
+            password = request.form.get("pwd")
+
+            if mailId == "":
+                flash("메일을 입력해 주세요")
+                return render_template("login.html")
+            elif password == "":
+                flash("패스워드를 입력 하세요")
+                return render_template("logIn.html")
+
+            match_user = db.users.find_one({'mailId': mailId})
+            chk_pw = bcrypt.check_password_hash(match_user['password'], password)
+            print('match_user', match_user)
+            print('chk_pw', chk_pw)
+            if chk_pw is False:
+                flash('비밀번호가 일치하지 않습니다.')
+            else:
+                if match_user is not None:
+                    payload = {
+                        'email': mailId,
+                        # 'expired': datetime.utcnow() + timedelta(days=1)
+                    }
+                    token = jwt.encode(payload, WYC_SECRET_KEY, algorithm='HS256')
+                    response = make_response(render_template('index.html'))
+                    response.set_cookie('token', token)
+                    return response
+
+                else:
+                    flash('아이디/비밀번호가 일치하지 않습니다.')
+                    return jsonify({'result': 'fail'})
+
+
+@app.route('/api', methods=['GET'])
+def api():
+    token_receive = request.cookies.get('token')
+    print('token_receive', token_receive)
+    try:
+        payload = jwt.decode(token_receive, WYC_SECRET_KEY, algorithms=['HS256'])
+        print('payload', payload)
+        user_info = db.users.find_one({"mailId": payload["email"]})
+        print('user_info', user_info)
+        return render_template('index.html', user_info=user_info)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 if __name__ == '__main__':
