@@ -261,7 +261,7 @@ p {
 }
 
 .review__detail {
-    width: 900px;
+    width: 850px;
     margin: 0 auto;
     padding-top: 30px;
     border: 2px solid var(--color-black);
@@ -271,7 +271,7 @@ p {
 .review__detail--container {
     display: flex;
     flex-wrap: wrap;
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -305,7 +305,8 @@ p {
 
 .review__write {
     margin: 0 auto;
-    width: 85%;
+    width: 90%;
+    text-align: center;
 }
 
 .review__write span {
@@ -314,12 +315,12 @@ p {
 
 .review__write span:nth-child(even) {
     float: left;
-    margin: 15px auto;
+    margin: 20px 20px;
 }
 
 .review__write span:nth-child(odd) {
     float: right;
-    margin: 15px auto;
+    margin: 20px 50px;
 }
 
 .review__write span input[type="radio"] {
@@ -345,6 +346,7 @@ p {
 }
 
 #review_comment {
+    width: 600px;
     height: 90px;
     vertical-align: bottom;
 }

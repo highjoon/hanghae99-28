@@ -80,12 +80,11 @@
     searchBtn.addEventListener('click', () => {
         find_camp();
     })
-
-    searchBtn.addEventListener("keyup", (key) => {
+    $('.home__form--input').on("keyup", function (key) {
         if (key.keyCode === 13) {
             find_camp();
         }
-    });
+    })
 
     $(document).ready(function () {
         createAvgList(camps);
