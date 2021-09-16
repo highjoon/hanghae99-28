@@ -104,15 +104,11 @@ p {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    background-color: var(--color-dark-white);
+    background-color: rgba( 255, 255, 255, 0.5 );
     align-items: center;
     color: var(--color-black);
     padding: 15px;
     z-index: 1;
-}
-
-.navbar {
-    text-align: center;
 }
 
 .navbar__menu {
@@ -281,7 +277,11 @@ p {
     height: 300px;
     display: inline;
     float: left;
+<<<<<<< HEAD
     flex-basis: 45%;
+=======
+    flex-basis: 30%;
+>>>>>>> 4ee0d4106850b8e614c1fdf7711ae1fba5fe71c5
     border-radius: var(--size-border-radius);
 }
 
@@ -289,7 +289,8 @@ p {
     margin: 0 auto;
     margin-bottom: 40px;
     text-align: center;
-    flex-basis: 50%;
+    flex-basis: 40%;
+    float: right;
     box-sizing: border-box;
 }
 
@@ -305,7 +306,12 @@ p {
 /* Reivew Write */
 
 .review__write {
+<<<<<<< HEAD
     margin: 100px auto;
+=======
+    margin: 10px auto;
+    margin-bottom: 60px;
+>>>>>>> 4ee0d4106850b8e614c1fdf7711ae1fba5fe71c5
     width: 90%;
     text-align: center;
 }
@@ -351,6 +357,7 @@ p {
 #review_comment {
     width: 600px;
     height: 90px;
+    margin-top: 20px;
     vertical-align: bottom;
     border-radius: var(--size-border-radius);
 }
