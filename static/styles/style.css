@@ -282,15 +282,7 @@ p {
     height: 300px;
     display: inline;
     float: left;
-<<<<<<< HEAD
-<<<<<<< HEAD
     flex-basis: 45%;
-=======
-    flex-basis: 30%;
->>>>>>> 4ee0d4106850b8e614c1fdf7711ae1fba5fe71c5
-=======
-    flex-basis: 45%;
->>>>>>> parent of 4ee0d41 (메인페이지, 상세페이지 스타일링 수정)
     border-radius: var(--size-border-radius);
 }
 
@@ -298,7 +290,7 @@ p {
     margin: 0 auto;
     margin-bottom: 40px;
     text-align: center;
-    flex-basis: 50%;
+    flex-basis: 40%;
     box-sizing: border-box;
 }
 
@@ -314,16 +306,7 @@ p {
 /* Reivew Write */
 
 .review__write {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    margin: 100px auto;
-=======
-    margin: 10px auto;
-    margin-bottom: 60px;
->>>>>>> 4ee0d4106850b8e614c1fdf7711ae1fba5fe71c5
-=======
-    margin: 100px auto;
->>>>>>> parent of 4ee0d41 (메인페이지, 상세페이지 스타일링 수정)
+    margin: 10px auto 60px auto;
     width: 90%;
     text-align: center;
 }

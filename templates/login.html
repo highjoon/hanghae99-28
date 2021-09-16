@@ -8,59 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/logIn.css' ) }}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
-<<<<<<< HEAD
-    function is_password(asValue) {
-        var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
-        return regExp.test(asValue);
-    }
-
-    function sign_in() {       // 32~49 빈값일대 알럿을 출력함 검증 요청 부분
-        let {{ usermail }} =
-        $("#input-username").val()
-        let {{ password }} =
-        $("#input-password").val()
-
-        {%  if (usermail == "") %}
-            $("#help-id-login").text("E-mail을 입력해주세요.")
-            $("#input-usemail").focus()
-            return;
-        {% else %} {
-            $("#help-id-login").text("")
-        }
-        {% endif %}
-        {%  if (password == "") %}
-            $("#help-password-login").text("비밀번호를 입력해주세요.")
-            $("#input-password").focus()
-            return;
-        {% else  %}
-            $("#help-password-login").text("")
-        {% endif %}
-        
-        $.ajax({
-            type: "POST", //
-            url: "/sign_in",
-            data: {
-                usermail_give:{{ usermail }},
-                password_give:{{ password }}
-            },                          //브라우저 쿠키에 저장 쿠키=브라우저 DB 같은거 키-밸류 형태로 저장
-            success: function {{ response }} {  //검증 통과시 토큰 받음 검증ID, 유효시간
-                {% if (response['result'] == 'success') %}
-                    $.cookie('mytoken', response['token'], {path: '/'}); // mytoken 실제 서버가 발행한 토큰
-                    alert(response[{{ '로그인 완료' }}])
-                    window.location.replace("/")
-                {% else %}
-                    alert(response[{{ '로그인 실패' }}])
-                    window.location.reload()
-                {% endif %}
-            }
-        });
-    }
-</script>
-=======
     <title>What's Your Choices?</title>
 </head>
->>>>>>> 43399a86afbd0f39566ddb59b2905f8f60576141
 <body>
     <div class="container">
 <form action="/login" method="POST">
