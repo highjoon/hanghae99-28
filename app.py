@@ -61,7 +61,7 @@ def review_post():
 
 # Login Page
 
-@app.route('/api/sign_in', methods=['GET'])  # 실제 DB에 대조하는 곳
+@app.route('/api/sign_in', methods=['POST'])  # 실제 DB에 대조하는 곳
 def api_sign_in():
     id_receive = request.form['id_give']  # ID 기존으로 받아줌
     pw_receive = request.form['pw_give']  # PW 해시처리해서 암호화해서 받아줌
@@ -75,7 +75,6 @@ def api_sign_in():
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60 * 60 * 2)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-        {"typ": "JWT", "alg": "HS256"}
 
         return jsonify({'result': 'success', 'token': token})
 
