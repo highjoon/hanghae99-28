@@ -26,14 +26,6 @@ function seperateReviewList(reviewList) {
     tuition = reviewList['tuition'];
     comment = reviewList['comment'];
 
-    let sum= 0;
-    let avg_sum = (Number(overall) + Number(period) + Number(recommend) + Number(tuition));
-    for (let i = 0;i < sum.length; i++){
-        avg_sum += sum[i];
-    }
-    // return avg_sum / Number(reviewList).length
-
-    console.log(avg_sum / sum.length)
-    // avg = (Number(overall) + Number(period) + Number(recommend) + Number(tuition)) /4  ;
-    // avg = avg.toFixed(2);
+    avg = (Number(overall) + Number(period) + Number(recommend) + Number(tuition)) /4  ;  
+    avg_count = avg_count.toFixed(2);
 }

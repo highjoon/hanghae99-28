@@ -158,7 +158,7 @@
 
     let overall, period, recommend, tuition, avg = null;
     let comment = '';
-
+// submitBtn 클릭하면 {} 안의 함수를 실행해라 
     submitBtn.addEventListener('click', () => {
         getCommentReview();
         seperateReviewList(reviewList);
@@ -178,6 +178,7 @@
                 tuition_give: tuition,
                 comment_give: comment,
                 avg_give: avg,
+                
             },
             success: function (response) {
                 alert(response['msg']);
