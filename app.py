@@ -62,6 +62,8 @@ def review_post():
         total += float(avg_receive)
         avg_count = total / cnt
 
+    print(avg_count)
+
     # 평균 구해지면 return 값으로 평균을 html로 전달.
     doc = {
         'author': author_receive,
@@ -72,7 +74,6 @@ def review_post():
         'tuition': tuition_receive,
         'comment': comment_receive,
         'avg': avg_receive,
-        'avg_count' :avg_count,
     }
     db.review.insert_one(doc)
     try:
