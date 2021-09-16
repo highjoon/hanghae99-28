@@ -18,7 +18,6 @@ function find_camp() {
             boot_id = false;
         }
     }
-
     if (boot_id) {
         let targetList = document.querySelectorAll(".card");
         targetList.forEach((target) => {
@@ -35,6 +34,25 @@ function find_camp() {
         showError();
         camp.innerText = "";
     }
+}
+
+function calculateAvg(campList) {
+    campList.forEach((camp) => {
+        let tempAvg = 0;
+        reviews.forEach((review) => {
+            if (review["campId"] === camp["id"]) {
+                tempAvg += Number(review["avg"]);
+            }
+        });
+        idList[camp["id"]] = tempAvg;
+    });
+}
+
+function createIdList(camps) {
+    camps.forEach((camp) => {
+        idList[camp["id"]] = null;
+        campList.push(camp);
+    });
 }
 
 function showError() {

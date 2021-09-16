@@ -28,22 +28,16 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
     ></script>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
 </head>
-<script>
-
-</script>
-
-
 <body>
 <!-- Navbar -->
 <nav id="navbar">
     <ul class="navbar__menu">
-        <li class="navbar__menu__item" data-link="#home">로그인</li>
-        <li class="navbar__menu__item" data-link="#about">회원가입</li>
+        <li class="navbar__menu__item" data-link="#home"><a href="/login">로그인</a></li>
+        <li class="navbar__menu__item" data-link="#about"><a href="/signup">회원가입</a></li>
     </ul>
 </nav>
-
 <!-- Home -->
 <section id="home">
     <div class="home__container">
@@ -55,7 +49,7 @@
 <section id="main">
     {% for camp in camps %}
         <div class="card" onclick="window.location.href = '/api/review/{{ camp['id'] }}'" id={{ camp['id'] }}>
-            <img src="static/img/{{ camp['boot_img'] }}" alt="{{ camp['name'] }}" id="boot_img"/>
+            <img src="static/image/{{ camp['boot_img'] }}" alt="{{ camp['name'] }}" id="boot_img"/>
             <p class="boot_name" id="boot_name">{{ camp['name'] }}</p>
             <p class="avg_grade">0</p>
         </div>
@@ -63,7 +57,7 @@
 
 
 </section>
-<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+<script src="{{ url_for('static',filename='javascripts/main.js') }}"></script>
 <script>
     $('.home__title').click(function () {
         location.reload();
@@ -72,10 +66,12 @@
     let camps = {{camps | tojson}};
     let reviews = {{reviews | tojson}};
     let campList = [];
+    let idList = [];
     let avgList = {};
     let cards = document.querySelectorAll('.card');
     let searchBtn = document.querySelector('.home__form--btn');
     let searchInput = document.querySelector('.home__form--input');
+    console.log(camps);
 
     searchBtn.addEventListener('click', () => {
         find_camp();
@@ -87,9 +83,15 @@
     })
 
     $(document).ready(function () {
+<<<<<<< HEAD
         createAvgList(camps);
         calculateAvg(campList);
         updateAvg(cards);
+=======
+        createIdList(camps);
+        calculateAvg(campList);
+        getAvg();
+>>>>>>> 43399a86afbd0f39566ddb59b2905f8f60576141
     });
 </script>
 

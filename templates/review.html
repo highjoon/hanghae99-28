@@ -24,16 +24,16 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
     ></script>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
-    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/review.js') }}"></script>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+    <script src="{{ url_for('static',filename='javascripts/main.js') }}"></script>
+    <script src="{{ url_for('static',filename='javascripts/review.js') }}"></script>
 </head>
 <body>
 <!-- Navbar -->
 <nav id="navbar">
     <ul class="navbar__menu">
-        <li class="navbar__menu__item active" data-link="#home">로그인</li>
-        <li class="navbar__menu__item" data-link="#about">회원가입</li>
+        <li class="navbar__menu__item" data-link="#home"><a href="/login">로그인</a></li>
+        <li class="navbar__menu__item" data-link="#about"><a href="/signup">회원가입</a></li>
     </ul>
 </nav>
 
@@ -47,7 +47,7 @@
     <div class="review__detail">
         <div class="review__detail--container">
             {% for camp in camps %}
-                <img src={{ url_for('static', filename='img/' + camp['boot_img']) }} alt={{ camp['id'] }}
+                <img src={{ url_for('static', filename='image/' + camp['boot_img']) }} alt={{ camp['id'] }}
                      id={{ camp['id'] }} class="boot_logo"/>
                 <div class="review__detail--info">
                     <a href={{ camp['link'] }} id="boot_name">{{ camp['name'] }}</a>
