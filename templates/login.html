@@ -1,35 +1,81 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[-1] }}")
+        </script>
+    {% endif %}
+{% endwith %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/logIn.css' ) }}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>What's Your Choices?</title>
+    <meta name="description"
+          content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
+    <meta name="author" content="hanghae99-28"/>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+    <!-- CSS -->
+    <link href="{{ url_for('static', filename='styles/login.css') }}" rel="stylesheet"/>
+    <!-- JavaScript -->
+    <script src="{{ url_for('static',filename='javascripts/main.js') }}"></script>
+    <script src="{{ url_for('static',filename='javascripts/review.js') }}"></script>
 </head>
 <body>
-    <div class="container">
-<form action="/login" method="POST">
-      <div class="input-options">
-        <label for="userMail">E-mail</label>
-        <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
-          autofocus autocomplete="off"/>
-      </div>
-      <div class="input-options">
-        <label for="userPW">password</label>
-        <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
-          autofocus />
-      </div>
-        <div class="btn">
-            <button type="submit" id="btn">로그인</button>
+<nav id="navbar" class="navcol">
+    <div class="nav-wrap">
+    <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png')}}" alt="yourChoice_logo">
+    <h1 class="home__title title">
+        <a href="/" class="color-a">
+            What is your choice?
+        </a>
+    </h1>
         </div>
-</form>
+    <div class="nav-second-wrap">
+    <ul class="navbar__menu">
+        <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_up"><a href="/signup">회원가입</a></li>
+    </ul>
     </div>
-    <script>
+</nav>
+<div class="container">
+    <form action="/login" method="POST">
+        <div class="input-options">
+            <label for="userMail">E-mail</label>
+            <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
+                   autofocus autocomplete="off"/>
+        </div>
+        <div class="input-options">
+            <label for="userPW">password</label>
+            <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
+                   autofocus/>
+        </div>
+        <div class="btn-wrap">
+            <button type="submit" id="btn">로그인하기</button>
+        </div>
+    </form>
+</div>
+<script>
 
-    </script>
+</script>
 </body>
 </html>

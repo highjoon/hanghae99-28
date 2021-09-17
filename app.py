@@ -13,30 +13,22 @@ bcrypt = Bcrypt(app)
 
 app.config.from_pyfile('setting.py')
 
-client = MongoClient(MONGODB_HOST, 27017)
+client = MongoClient('localhost', 27017)
 db = client.dbsparta_28
 app.secret_key = WYC_SECRET_KEY
-
-print('WYC_SECRET_KEY', MONGODB_HOST, WYC_SECRET_KEY)
-
-
-# @app.route('/')
-# def main():
-# camps = list(db.detail.find({}, {'_id': False}))
-# reviews = list(db.review.find({}, {'_id': False}))
-# return render_template("project_index.html", camps=camps, reviews=reviews)
 
 
 @app.route('/')
 def render_main():
     camps = list(db.detail.find({}, {'_id': False}))
     reviews = list(db.review.find({}, {'_id': False}))
-    return render_template("index.html", camps=camps, reviews=reviews)
+    isLogin = 'false'
+    return render_template("index.html", camps=camps, reviews=reviews, isLogin=isLogin)
 
 
 @app.route('/login')
 def render_login():
-    return render_template("logIn.html")
+    return render_template("login.html")
 
 
 # Review Page
@@ -77,8 +69,6 @@ def review_post():
         cnt += 1
         total += float(avg_receive)
         avg_count = total / cnt
-
-    print(avg_count)
 
     # 평균 구해지면 return 값으로 평균을 html로 전달.
     doc = {
@@ -128,10 +118,10 @@ def save_userinfo():
 
         if dup_mail:
             flash("이미 등록된 메일 주소입니다.")
-            return render_template("logIn.html")
+            return render_template("login.html")
 
             # message = "이미 등록된 메일 주소입니다."
-            # return render_template("logIn.html", message=message)
+            # return render_template("login.html", message=message)
         if dup_name:
             flash("이미 사용중인 닉네임입니다.")
             return render_template("signUp.html")
@@ -149,7 +139,7 @@ def save_userinfo():
 
         users.insert_one(user)
         flash("회원가입이 완료되었습니다. 로그인 창으로 이동합니다.")
-        return render_template("logIn.html")
+        return render_login()
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -163,28 +153,29 @@ def login():
             return render_template("login.html")
         elif password == "":
             flash("패스워드를 입력 하세요")
-            return render_template("logIn.html")
+            return render_template("login.html")
 
         match_user = db.users.find_one({'mailId': mailId})
-        chk_pw = bcrypt.check_password_hash(match_user['password'], password)
-        print('match_user', match_user)
-        print('chk_pw', chk_pw)
-        if chk_pw is False:
-            flash('비밀번호가 일치하지 않습니다.')
-        else:
+        if match_user is not None:
+            chk_pw = bcrypt.check_password_hash(match_user['password'], password)
+            print('match_user', match_user)
+            print('chk_pw', chk_pw)
             if match_user is not None:
                 payload = {
                     'email': mailId,
-                    # 'expired': datetime.utcnow() + timedelta(days=1)
                 }
                 token = jwt.encode(payload, WYC_SECRET_KEY, algorithm='HS256')
-                response = make_response(render_template('index.html'))
+                isLogin = 'true'
+                camps = list(db.detail.find({}, {'_id': False}))
+                reviews = list(db.review.find({}, {'_id': False}))
+                response = make_response(render_template("index.html", camps=camps, reviews=reviews, isLogin=isLogin))
+                token = str(token)
                 response.set_cookie('token', token)
+                print(token)
                 return response
-
-            else:
-                flash('아이디/비밀번호가 일치하지 않습니다.')
-                return jsonify({'result': 'fail'})
+        else:
+            flash('비밀번호가 일치하지 않습니다.')
+            return render_template("login.html")
 
 
 @app.route('/api', methods=['GET'])
@@ -198,7 +189,7 @@ def api():
         print('user_info', user_info)
         return render_template('index.html', user_info=user_info)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("home"))
+        return redirect(url_for("/"))
 
 
 if __name__ == '__main__':
