@@ -126,18 +126,18 @@ p {
     cursor: pointer;
     border-radius: var(--size-border-radius);
     background-color: #D6A4A4;
-    /*background-color: var(--color-red);*/
     color: var(--color-white);
     font-size: var(--font-regular);
     font-weight: var(--weight-bold);
     transition: all var(--animation-duration) ease-in-out;
 }
+
 .nav-btn {
     padding: 8px 12px;
     margin: 0 4px;
     cursor: pointer;
-
 }
+
 .navbar__menu__item:hover {
     background-color: var(--color-white);
     /*color: var(--color-black);*/
@@ -148,8 +148,7 @@ p {
 /* Home */
 
 #home {
-    padding: 0 10px 40px 40px;
-    padding-top: 120px;
+    padding: 150px 10px 40px 40px;
     justify-content: center;
     display: flex;
 }
@@ -374,7 +373,6 @@ p {
     font-size: var(--font-regular);
     font-weight: var(--weight-bold);
     vertical-align: bottom;
-    /*background-color: var(--color-red);*/
     background-color: #D6A4A4;
     color: var(--color-white);
     border-radius: var(--size-border-radius);
@@ -382,8 +380,7 @@ p {
 }
 
 .review__btn:hover {
-    /*background-color: var(--color-dark-grey);*/
-    background-color: white;
+    background-color: #DAE2F8;
     color: white;
 }
 
@@ -394,16 +391,12 @@ p {
     margin: 30px 30px;
     padding-bottom: 30px;
     border-bottom: 2px solid var(--color-black);
-}
-
-.review__list--col .nickname {
-    flex-basis: 30%;
     text-align: center;
 }
 
+
 .review__list--col .comment {
-    flex-basis: 70%;
-    text-align: left;
+    margin: 0 auto;
 }
 
 .show {
@@ -460,6 +453,7 @@ body {
 .title {
     color: #D6A4A4;
 }
+
 .navcol {
     display: flex;
     justify-content: space-between;
@@ -470,7 +464,7 @@ body {
 }
 
 .home__form--input:hover {
-    border: 1px solid #D6A4A4 ;
+    border: 1px solid #D6A4A4;
 }
 
 .camp:hover {
