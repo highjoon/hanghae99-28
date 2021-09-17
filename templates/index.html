@@ -1,12 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>What's Your Choices?</title>
+    <meta name="description"
+          content="software Bootcamp 정보를 모아 한 눈에 비교하고, 수강생들의 후기 및 각 Bootcamp별 평점을 확인할 수 있는 웹 어플리케이션"/>
+    <meta name="author" content="hanghae99-28"/>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/4c48d1e1c1.js" crossorigin="anonymous"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
 </head>
 <body>
-<a href="/login">로그인</a> / <a href="/signup">회원가입</a>
-</body>
-</html>
+
+<!-- Navbar -->
+<nav id="navbar">
+    <ul class="navbar__menu">
+        <li class="navbar__menu__item" data-link="#home"><a href="/login">로그인</a></li>
+        <li class="navbar__menu__item" data-link="#about"><a href="/signup">회원가입</a></li>
+    </ul>
+</nav>
+<!-- Home -->
+<section id="home">
+    <div class="home__container">
+        <h1 class="home__title">What is your choice?</h1>
+        <input class="home__form--input" id="boot_search" type="text" placeholder="부트캠프를 검색해주세요"/>
+        <button class="home__form--btn">검색</button>
+    </div>
+</section>
+<section id="main">
+    {% for camp in camps %}
+        <div class="card" onclick="window.location.href = '/api/review/{{ camp['id'] }}'" id={{ camp['id'] }}>
+            <img src="static/image/{{ camp['boot_img'] }}" alt="{{ camp['name'] }}" id="boot_img"/>
+            <p class="boot_name" id="boot_name">{{ camp['name'] }}</p>
+            <p class="avg_grade">0</p>
+        </div>
+    {% endfor %}
+
+
+</section>
+<script src="{{ url_for('static',filename='javascripts/main.js') }}"></script>
+<script>
+    $('.home__title').click(function () {
+        location.reload();
+    });
+
+    let camps = {{camps | tojson}};
+    let reviews = {{reviews | tojson}};
+    let campList = [];
+    let idList = [];
+    let avgList = {};
+    let cards = document.querySelectorAll('.card');
+    let searchBtn = document.querySelector('.home__form--btn');
+    let searchInput = document.querySelector('.home__form--input');
+    console.log(camps);
+
+    searchBtn.addEventListener('click', () => {
+        find_camp();
+    })
+    $('.home__form--input').on("keyup", function (key) {
+        if (key.keyCode === 13) {
+            find_camp();
+        }
+    })
+
+    $('.home__title').click(function () {
+        location.reload();
+    });
+
+    function getAvg() {
+        $.ajax({
+            type: 'GET',
+            url: '/api/index/',
+            data: {},
+            success: function (response) {
+                if (response['result'] === 'success') {
+                    let reviews = response['review_count'];
+                    {# ES6문법 => 2016년(아마도)에 JavaScript측에서 새로 내놓은 문법 #}
+                    {# forEach => for문을 더 간략하게 사용하기 위해서 사용 #}
+                    cards.forEach(card => {
+                        {# count: 각 부트캠프 별 리뷰 작성자 수 #}
+                        {# avg_sum: 각 부트캠프 별 전체 리뷰 수 #}
+                        {# total_avg: avg_sum / count 즉, 각 부트캠프 별 평점의 평균 #}
+                        let count = 0;
+                        let avg_sum = 0;
+                        let total_avg = 0;
+                        for (let review of reviews) {
+                            if (card.id === review['campId']) {
+                                count++;
+                                avg_sum += Number(review['avg']);
+                            }
+                        }
+                        total_avg = (avg_sum / count).toFixed(2);
+                        {#    !isNaN : (숫자가 아닌 것.)반대 => 숫자인 것.  #}
+                        {#    [삼항연산자]  조건문 ? 조건문이 true일 경우 실행문 : 조건문이 false인 경우 실행문   #}
+                        !isNaN(total_avg) ? card.children[2].innerHTML = total_avg : card.children[2].innerHTML = 0;
+                        {#    console.log('id', card.id, 'avg_sum', avg_sum, 'count', count, 'total_avg', total_avg);   #}
+                    })
+                }
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        createIdList(camps);
+        calculateAvg(campList);
+        getAvg();
+    });
+</script>
+
 </body>
 </html>

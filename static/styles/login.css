@@ -5,13 +5,6 @@
   align-items: center;
 }
 
-/*form {*/
-/*  width: 500px;*/
-/*  height: 700px;*/
-/*  font-size: 17px;*/
-/*  align-items: center;*/
-/*}*/
-
 .input-options {
   display: flex;
   justify-content: space-around;
@@ -29,18 +22,6 @@ input {
   border-top: none;
   border-left: none;
   border-right: none;
-}
-
-input[type="radio"] {
-  width: 10px;
-}
-/* input:required:invalid {
-  border-color: #71b280;
-} */
-small {
-  text-align: center;
-  padding-left: 10px;
-  color: #FFC837;
 }
 
 .btn-wrap {
@@ -72,9 +53,3 @@ button::after {
   color: #ff96ad;
   background-color: #17181c;
 }
-
-/*
-a {
-  text-decoration: none;
-  color: black;
-} */

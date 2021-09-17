@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css' ) }}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <title>What's Your Choices?</title>
+</head>
+<body>
+    <div class="container">
+    <form action="" method="POST">
+      <div class="input-options">
+        <label for="userMail">E-mail</label>
+        <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
+          autofocus autocomplete="off"/>
+      </div>
+      <div class="input-options">
+        <label for="userPW">password</label>
+        <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
+          autofocus />
+      </div>
+        <div class="btn-wrap">
+            <button type="submit" id="btn">로그인하기</button>
+        </div>
+</form>
+    </div>
+
+</body>
+</html>

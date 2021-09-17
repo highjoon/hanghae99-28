@@ -12,29 +12,24 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 app.config.from_pyfile('setting.py')
+# app.config.from_pyfile('init_db.py')
 
 client = MongoClient(MONGODB_HOST, 27017)
 db = client.dbsparta_28
 app.secret_key = WYC_SECRET_KEY
 
-print('WYC_SECRET_KEY',MONGODB_HOST, WYC_SECRET_KEY)
-
-
-# @app.route('/')
-# def main():
-# camps = list(db.detail.find({}, {'_id': False}))
-# reviews = list(db.review.find({}, {'_id': False}))
-# return render_template("project_index.html", camps=camps, reviews=reviews)
 
 
 @app.route('/')
 def render_main():
-    return render_template("index.html")
+    camps = list(db.detail.find({}, {'_id': False}))
+    reviews = list(db.review.find({}, {'_id': False}))
+    return render_template("index.html", camps=camps, reviews=reviews)
 
 
 @app.route('/login')
 def render_login():
-    return render_template("logIn.html")
+    return render_template("login.html")
 
 
 # Review Page
@@ -96,6 +91,12 @@ def review_post():
         return jsonify({'result': 'success', 'msg': '실패!'})
 
 
+@app.route('/api/index/', methods=['GET'])
+def get_avg():
+    review_count = list(db.review.find({}, {'_id': False}))
+    return jsonify({'result': 'success', 'msg': '평점 평균 계산 완료!', 'review_count': review_count})
+
+
 @app.route('/signup')
 def sign_up():
     return render_template("signUp.html")
@@ -120,7 +121,7 @@ def save_userinfo():
 
         if dup_mail:
             flash("이미 등록된 메일 주소입니다.")
-            return render_template("logIn.html")
+            return render_template("login.html")
 
             # message = "이미 등록된 메일 주소입니다."
             # return render_template("logIn.html", message=message)
@@ -141,42 +142,42 @@ def save_userinfo():
 
         users.insert_one(user)
         flash("회원가입이 완료되었습니다. 로그인 창으로 이동합니다.")
-        return render_template("logIn.html")
+        return render_template("login.html")
 
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-            mailId = request.form.get("mailId")
-            password = request.form.get("pwd")
+        mailId = request.form.get("mailId")
+        password = request.form.get("pwd")
 
-            if mailId == "":
-                flash("메일을 입력해 주세요")
-                return render_template("login.html")
-            elif password == "":
-                flash("패스워드를 입력 하세요")
-                return render_template("logIn.html")
+        if mailId == "":
+            flash("메일을 입력해 주세요")
+            return render_template("login.html")
+        elif password == "":
+            flash("패스워드를 입력 하세요")
+            return render_template("logIn.html")
 
-            match_user = db.users.find_one({'mailId': mailId})
-            chk_pw = bcrypt.check_password_hash(match_user['password'], password)
-            print('match_user', match_user)
-            print('chk_pw', chk_pw)
-            if chk_pw is False:
-                flash('비밀번호가 일치하지 않습니다.')
+        match_user = db.users.find_one({'mailId': mailId})
+        chk_pw = bcrypt.check_password_hash(match_user['password'], password)
+        print('match_user', match_user)
+        print('chk_pw', chk_pw)
+        if chk_pw is False:
+            flash('비밀번호가 일치하지 않습니다.')
+        else:
+            if match_user is not None:
+                payload = {
+                    'email': mailId,
+                    # 'expired': datetime.utcnow() + timedelta(days=1)
+                }
+                token = jwt.encode(payload, WYC_SECRET_KEY, algorithm='HS256')
+                response = make_response(render_template('index.html'))
+                response.set_cookie('token', token)
+                return response
+
             else:
-                if match_user is not None:
-                    payload = {
-                        'email': mailId,
-                        # 'expired': datetime.utcnow() + timedelta(days=1)
-                    }
-                    token = jwt.encode(payload, WYC_SECRET_KEY, algorithm='HS256')
-                    response = make_response(render_template('index.html'))
-                    response.set_cookie('token', token)
-                    return response
-
-                else:
-                    flash('아이디/비밀번호가 일치하지 않습니다.')
-                    return jsonify({'result': 'fail'})
+                flash('아이디/비밀번호가 일치하지 않습니다.')
+                return jsonify({'result': 'fail'})
 
 
 @app.route('/api', methods=['GET'])
