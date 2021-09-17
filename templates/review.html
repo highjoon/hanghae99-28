@@ -41,21 +41,26 @@
     <script src="{{ url_for('static',filename='javascripts/review.js') }}"></script>
 </head>
 <body>
+<!-- Navbar -->
 <nav id="navbar" class="navcol">
     <div class="nav-wrap">
-    <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png')}}" alt="yourChoice_logo">
-    <h1 class="home__title title">
-        <a href="/" class="color-a">
-            What is your choice?
-        </a>
-    </h1>
+        <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png') }}" alt="yourChoice_logo">
+        <h1 class="home__title title">
+            <a href="/" class="color-a">
+                What is your choice?
+            </a>
+        </h1>
+    </div>
+    <div class="nav-second-wrap">
+        <ul class="navbar__menu">
+{#            <li class="navbar__menu__item nav-btn" data-link="#home" id="sign_in"><a href="/login">로그인</a></li>#}
+{#            <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_up"><a href="/signup">회원가입</a></li>#}
+{#            <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_out"><a href="/">로그아웃</a></li>#}
+        </ul>
     </div>
 </nav>
 <!-- Home -->
 <section id="home">
-{#    <div class="home__container">#}
-{#        <h1 class="home__title">What is your choice?</h1>#}
-{#    </div>#}
 </section>
 <section id="review">
     <div class="review__detail">
@@ -134,7 +139,6 @@
         <div id="review__list">
             {% for review in reviews %}
                 <div class="review__list--col">
-                    <div class="nickname"><span> {{ nickname }}</span></div>
                     <div class="comment">
                         <span>{{ review.comment }}</span>
                     </div>

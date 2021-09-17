@@ -36,27 +36,32 @@
             crossorigin="anonymous"
     ></script>
     <!-- CSS -->
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='styles/login.css') }}" rel="stylesheet"/>
     <!-- JavaScript -->
     <script src="{{ url_for('static',filename='javascripts/main.js') }}"></script>
     <script src="{{ url_for('static',filename='javascripts/review.js') }}"></script>
 </head>
 <body>
+<!-- Navbar -->
 <nav id="navbar" class="navcol">
     <div class="nav-wrap">
-    <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png')}}" alt="yourChoice_logo">
-    <h1 class="home__title title">
-        <a href="/" class="color-a">
-            What is your choice?
-        </a>
-    </h1>
-        </div>
+        <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png') }}" alt="yourChoice_logo">
+        <h1 class="home__title title">
+            <a href="/" class="color-a">
+                What is your choice?
+            </a>
+        </h1>
+    </div>
     <div class="nav-second-wrap">
-    <ul class="navbar__menu">
-        <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_up"><a href="/signup">회원가입</a></li>
-    </ul>
+        <ul class="navbar__menu">
+            <li class="navbar__menu__item nav-btn" data-link="#home" id="sign_in"><a href="/login">로그인</a></li>
+            <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_up"><a href="/signup">회원가입</a></li>
+            <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_out"><a href="/">로그아웃</a></li>
+        </ul>
     </div>
 </nav>
+<!-- Home -->
 <div class="container">
     <form action="/login" method="POST">
         <div class="input-options">

@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css' ) }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/signup.css' ) }}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -23,54 +23,58 @@
 
 </head>
 <body>
+<!-- Navbar -->
 <nav id="navbar" class="navcol">
     <div class="nav-wrap">
-    <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png')}}" alt="yourChoice_logo">
-    <h1 class="home__title title">
-        <a href="/" class="color-a">
-            What is your choice?
-        </a>
-    </h1>
+        <img class="teamLogo" src="{{ url_for('static', filename='image/your_choice.png') }}" alt="yourChoice_logo">
+        <h1 class="home__title title">
+            <a href="/" class="color-a">
+                What is your choice?
+            </a>
+        </h1>
     </div>
     <div class="nav-second-wrap">
-    <ul class="navbar__menu">
-        <li class="navbar__menu__item nav-btn" data-link="#home" id="sign_in"><a href="/login">로그인</a></li>
-    </ul>
+        <ul class="navbar__menu">
+            <li class="navbar__menu__item nav-btn" data-link="#home" id="sign_in"><a href="/login">로그인</a></li>
+            <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_up"><a href="/signup">회원가입</a></li>
+            <li class="navbar__menu__item nav-btn" data-link="#about" id="sign_out"><a href="/">로그아웃</a></li>
+        </ul>
     </div>
 </nav>
-  <div class="container">
+<!-- Home -->
+<div class="container">
     <form action="" method="POST">
-      <div class="input-options">
-        <label for="userMail">E-mail</label>
-        <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
-          autofocus autocomplete="off"/>
-      </div>
-      <div class="input-options">
-        <label for="userPW">password</label>
-        <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
-          autofocus />
-      </div>
+        <div class="input-options">
+            <label for="userMail">E-mail</label>
+            <input name="mailId" id="userMail" type="email" placeholder="이메일을 입력해 주세요" required
+                   autofocus autocomplete="off"/>
+        </div>
+        <div class="input-options">
+            <label for="userPW">password</label>
+            <input name="pwd" id="userPW" type="password" placeholder="비밀번호를 입력해 주세요" required autocomplete="off"
+                   autofocus/>
+        </div>
         <small>* password는 영문과 숫자, 특수문자를 포함한 8자리 이상의 문자열이어야 합니다.</small>
-      <div class="input-options">
-        <label for="userName">Nickname</label>
-        <input name="nickName" id="userName" type="text" placeholder="닉네임을 입력해 주세요" required autocomplete="off" />
-      </div>
-      <div class="input-options">
-        <label for="userCamp">Bootcamp</label>
-        <input name="bootCamp" id="userCamp" type="text" placeholder="수료한 부트캠프명을 입력해 주세요" autocomplete="off" />
-      </div>
+        <div class="input-options">
+            <label for="userName">Nickname</label>
+            <input name="nickName" id="userName" type="text" placeholder="닉네임을 입력해 주세요" required autocomplete="off"/>
+        </div>
+        <div class="input-options">
+            <label for="userCamp">Bootcamp</label>
+            <input name="bootCamp" id="userCamp" type="text" placeholder="수료한 부트캠프명을 입력해 주세요" autocomplete="off"/>
+        </div>
         <small>* 부트캠프 경험이 없으신 경우 공란으로 제출해주십시오.</small>
-      <div class="input-options">
-        <input type="radio" id="CS-major" name="hasCsMajor" value="true" checked />
-        <label for="CS-major">컴퓨터 관련 전공</label>
-        <input type="radio" id="non-major" name="hasCsMajor" value="false" />
-        <label for="non-major">비전공</label>
-      </div>
-      <div class="btn-wrap">
-          <button class="btn" type="submit">가입하기</button>
-      </div>
+        <div class="input-options">
+            <input type="radio" id="CS-major" name="hasCsMajor" value="true" checked/>
+            <label for="CS-major">컴퓨터 관련 전공</label>
+            <input type="radio" id="non-major" name="hasCsMajor" value="false"/>
+            <label for="non-major">비전공</label>
+        </div>
+        <div class="btn-wrap">
+            <button class="btn" type="submit">가입하기</button>
+        </div>
     </form>
-  </div>
+</div>
 {#  <script src="{{ url_for('static',filename='javascript/signup.js') }}"></script>#}
-  </body>
+</body>
 </html>

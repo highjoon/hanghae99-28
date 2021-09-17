@@ -2,6 +2,7 @@ body {
     font-family: 'Jua', sans-serif;
     margin: 0;
     cursor: default;
+    background-color: white;
 }
 
 a {
@@ -133,4 +134,9 @@ button::after {
     border: 2px solid #ff96ad;
     color: #ff96ad;
     background-color: #17181c;
+}
+
+#sign_in,
+#sign_out {
+    display: none;
 }
