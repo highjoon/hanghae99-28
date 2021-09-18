@@ -112,7 +112,8 @@
         location.reload();
     });
 
-    {# 평점 평균 계산 및 메인페이지에 출력#}
+    {# 평점 평균 계산 및 메인페이지에 출력 #}
+
     function getAvg() {
         $.ajax({
             type: 'GET',
@@ -120,18 +121,39 @@
             data: {},
             success: function (response) {
                 if (response['result'] === 'success') {
+                    {# 서버측에서 리뷰 DB를 reviews로 받아옴 #}
+                    {# 캠프별ID, 4개 만족도 점수, 후기, 4개 만족도 점수의 평균 #}
+                    {# campId, overall, period, recommend, tuition, comment, avg #}
                     let reviews = response['review_count'];
+
+                    {# cards : querySelectorAll로 메인페이지의 각 부트캠프 별 카드 선택 #}
+                    {# forEach로 cards 순환 즉, 각 부트캠프 카드 별로 다음의 콜백함수 실행 #}
                     cards.forEach(card => {
+                        {# count: 각 부트캠프의 리뷰 작성한 사람 수 #}
                         let count = 0;
+                        {# avg_sum: 각 부트캠프의 리뷰점수 평균을 전부 합한 총합 #}
                         let avg_sum = 0;
+                        {# total_avg: 각 부트캠프 별 전체 점수 평균 #}
                         let total_avg = 0;
+
+                        {# 리뷰 DB 데이터(reviews)를 review라는 이름으로 순환 #}
                         for (let review of reviews) {
+                            {# 메인페이지 부트캠프 카드의 캠프ID와 리뷰 DB 데이터 상의 캠프ID가 같으면 #}
+                            {# 즉, 이 카드와 일치하는 리뷰를 찾으면 #}
                             if (card.id === review['campId']) {
+                                {# count++  =>  각 부트캠프의 리뷰 작성한 사람 수 파악 #}
                                 count++;
+                                {# avg_sum  =>  각 부트캠프의 리뷰점수 평균을 전부 합한 총합 파악 #}
                                 avg_sum += Number(review['avg']);
                             }
                         }
+                        {# avg_sum / count  =>  각 부트캠프 별 전체 점수 평균 계산 및 소숫점 2째자리까지 반올림 #}
                         total_avg = (avg_sum / count).toFixed(2);
+
+                        {# 리뷰가 아직 하나도 등록되어있지 않으면 total_avg는 NaN이 됨 #}
+
+                        {# total_avg가 NaN이 아니면 즉 숫자일 경우, 메인페이지 카드의 평점 칸에 삽입 #}
+                        {# total_avg가 NaN이면 즉 숫자가 아닐 경우, 메인페이지 카드의 평점 칸에 0 삽입 #}
                         !isNaN(total_avg) ? card.children[2].innerHTML = total_avg : card.children[2].innerHTML = 0;
                     })
                 }
