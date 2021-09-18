@@ -54,6 +54,7 @@ def review_post():
     comment_receive = request.form['comment_give']
     avg_receive = request.form['avg_give']
 
+    '''
     # DB안에 저장되어있는 특정 부트캠프의 평점 총합.
     total = 0
     # DB안에 저장되어있는 특정 부트캠프의 리뷰 갯수.
@@ -75,7 +76,7 @@ def review_post():
         # DB안에 특정 부트캠프의 리뷰가 있다면 avg_count는 평점 총합 / 리뷰 갯수
         total += float(avg_receive)
         avg_count = total / cnt
-
+    '''
     # 전달 받은 값을 review 테이블에 insert.
     doc = {
         'author': author_receive,
