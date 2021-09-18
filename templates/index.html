@@ -120,12 +120,7 @@
             success: function (response) {
                 if (response['result'] === 'success') {
                     let reviews = response['review_count'];
-                    {# ES6문법 => 2016년(아마도)에 JavaScript측에서 새로 내놓은 문법 #}
-                    {# forEach => for문을 더 간략하게 사용하기 위해서 사용 #}
                     cards.forEach(card => {
-                        {# count: 각 부트캠프 별 리뷰 작성자 수 #}
-                        {# avg_sum: 각 부트캠프 별 전체 리뷰 수 #}
-                        {# total_avg: avg_sum / count 즉, 각 부트캠프 별 평점의 평균 #}
                         let count = 0;
                         let avg_sum = 0;
                         let total_avg = 0;
@@ -136,10 +131,7 @@
                             }
                         }
                         total_avg = (avg_sum / count).toFixed(2);
-                        {#    !isNaN : (숫자가 아닌 것.)반대 => 숫자인 것.  #}
-                        {#    [삼항연산자]  조건문 ? 조건문이 true일 경우 실행문 : 조건문이 false인 경우 실행문   #}
                         !isNaN(total_avg) ? card.children[2].innerHTML = total_avg : card.children[2].innerHTML = 0;
-                        {#    console.log('id', card.id, 'avg_sum', avg_sum, 'count', count, 'total_avg', total_avg);   #}
                     })
                 }
             }

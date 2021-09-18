@@ -3,12 +3,12 @@ function clickEvent(elementList) {
         element.addEventListener("click", (event) => {
             let score = Number(event.target.innerText);
             let target = event.target.previousSibling.parentNode.id;
-            getRadioReview(score, target);
+            getRadioBtnScore(score, target);
         });
     });
 }
 
-function getRadioReview(score, target) {
+function getRadioBtnScore(score, target) {
     reviewList[target] = score;
 }
 
