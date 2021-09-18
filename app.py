@@ -13,7 +13,8 @@ bcrypt = Bcrypt(app)
 
 app.config.from_pyfile('setting.py')
 
-client = MongoClient('mongodb://test:test@localhost', 27017)
+# client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 db = client.dbsparta_28
 app.secret_key = WYC_SECRET_KEY
 
